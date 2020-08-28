@@ -10,8 +10,10 @@ import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Spinner oidWellChoices;
+    private Spinner oilWellChoices;
     private String[] oilWells;
+    private String[] charts;
+    private Spinner chartChoices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,23 +24,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initWidget() {
-        oidWellChoices = (Spinner) this.findViewById(R.id.oilWellChoices);
-        oidWellChoices.setOnItemSelectedListener(new oidWellsItemSelectedListener());
+        oilWellChoices = (Spinner) this.findViewById(R.id.oilWellChoices);
+        oilWellChoices.setOnItemSelectedListener(new oidWellsItemSelectedListener());
+
+        chartChoices = (Spinner) this.findViewById(R.id.chartChoices);
+        chartChoices.setOnItemSelectedListener(new chartItemSelectedListener());
     }
 
     private void assignValues() {
         oilWells = getResources().getStringArray(R.array.oil_wells);
+        charts = getResources().getStringArray(R.array.charts);
     }
 
     private class oidWellsItemSelectedListener implements android.widget.AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            MainActivity.this.setTitle(oilWells[i]);
+            updateAppTitle();
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> adapterView) {
 
         }
+    }
+
+    private class chartItemSelectedListener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            updateAppTitle();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    }
+
+    private void updateAppTitle() {
+        MainActivity.this.setTitle(oilWells[(int) oilWellChoices.getSelectedItemId()]+"-"+charts[(int) chartChoices.getSelectedItemId()]);
     }
 }

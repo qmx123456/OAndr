@@ -4,4 +4,8 @@
         <item>Q1油井</item>
         <item>Q2油井</item>
     </string-array>
+    <string-array name="charts">
+        <item>曲线</item>
+    </string-array>
+
 </resources>

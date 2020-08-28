@@ -20,6 +20,19 @@
             android:layout_height="wrap_content"
             android:entries="@array/oil_wells"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:textSize="@dimen/symbol_size"
+            android:text="@string/chart_symbol"
+            />
+        <Spinner
+            android:id="@+id/chartChoices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/charts"
+            />
     </TableRow>
 
 </TableLayout>

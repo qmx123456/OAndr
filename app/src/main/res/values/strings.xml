@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">油井详情</string>
     <string name="oil_wells_symbol">油井：</string>
+    <string name="chart_symbol">图形：</string>
 </resources>
