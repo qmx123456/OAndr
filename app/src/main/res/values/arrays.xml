@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="oil_wells">
+        <item>Q1油井</item>
+        <item>Q2油井</item>
+    </string-array>
+</resources>

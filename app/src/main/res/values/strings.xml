@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Welcome</string>
+    <string name="app_name">油井详情</string>
+    <string name="oil_wells_symbol">油井：</string>
 </resources>
