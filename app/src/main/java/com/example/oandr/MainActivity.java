@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
-
     private Spinner oilWellChoices;
     private String[] oilWells;
     private String[] charts;
@@ -36,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         charts = getResources().getStringArray(R.array.charts);
     }
 
+    private void updateAppTitle() {
+        MainActivity.this.setTitle(oilWells[(int) oilWellChoices.getSelectedItemId()]+"-"+charts[(int) chartChoices.getSelectedItemId()]);
+    }
     private class oidWellsItemSelectedListener implements android.widget.AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -58,9 +60,5 @@ public class MainActivity extends AppCompatActivity {
         public void onNothingSelected(AdapterView<?> adapterView) {
 
         }
-    }
-
-    private void updateAppTitle() {
-        MainActivity.this.setTitle(oilWells[(int) oilWellChoices.getSelectedItemId()]+"-"+charts[(int) chartChoices.getSelectedItemId()]);
     }
 }
