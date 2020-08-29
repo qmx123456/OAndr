@@ -1,21 +1,15 @@
 package com.example.oandr;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
-import org.apache.http.util.EncodingUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Spinner oilWellChoices;
