@@ -34,16 +34,13 @@
             android:entries="@array/charts"
             />
     </TableRow>
-    <TableRow>
-        <com.example.oandr.LinePaint
-            android:id="@+id/chart"
+    <com.example.oandr.LinePaint
+        android:id="@+id/chart"
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/chart_margin_left"
-            android:layout_marginRight="@dimen/chart_margin_right"
-            android:layout_marginBottom="@dimen/chart_margin_bottom"
-            android:layout_marginTop="@dimen/chart_margin_top"/>
-    </TableRow>
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/chart_margin_left"
+        android:layout_marginRight="@dimen/chart_margin_right"
+        android:layout_marginBottom="@dimen/chart_margin_bottom"
+        android:layout_marginTop="@dimen/chart_margin_top"/>
 </TableLayout>

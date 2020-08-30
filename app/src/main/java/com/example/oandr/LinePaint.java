@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 public class LinePaint extends View {
 
@@ -27,15 +28,11 @@ public class LinePaint extends View {
         Resources resources = this.getResources();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
         float density = displayMetrics.density;
-        float widthPixels = displayMetrics.widthPixels;
-        float heightPixels = displayMetrics.heightPixels;
 
         leftDpTpPx = context.getResources().getDimension(R.dimen.chart_margin_left)/density;
         rightDpToPx = context.getResources().getDimension(R.dimen.chart_margin_right)/density;
         topDpToPx = context.getResources().getDimension(R.dimen.chart_margin_top)/density;
         bottomDpToPx = context.getResources().getDimension(R.dimen.chart_margin_bottom)/density;
-
-        this.width = widthPixels - leftDpTpPx - rightDpToPx;
     }
 
     @Override
@@ -50,11 +47,12 @@ public class LinePaint extends View {
         paint.setStrokeWidth(4);
         Log.d("oil-line", String.valueOf(height));
         Log.d("oil-line", String.valueOf(width));
-        canvas.drawLine(0,height,2200,height,paint);
+        canvas.drawLine(0,height,width,height,paint);
         canvas.save();
     }
 
-    public void setHeight(int height) {
+    public void setSize(int width, int height) {
         this.height = height- topDpToPx - bottomDpToPx;
+        this.width = width - leftDpTpPx - rightDpToPx;
     }
 }

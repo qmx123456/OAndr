@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,12 +33,13 @@ public class MainActivity extends AppCompatActivity {
         initWidget();
         chart = (LinePaint) this.findViewById(R.id.chart);
 
+
         ViewTreeObserver vto = chart.getViewTreeObserver();
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             public boolean onPreDraw() {
                 int height = chart.getMeasuredHeight();
                 int width = chart.getMeasuredWidth();
-                chart.setHeight(height);
+                chart.setSize(width,height);
                 return true;
             }
         });
