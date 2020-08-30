@@ -41,13 +41,20 @@ public class LinePaint extends View {
         super.setBackgroundColor(Color.WHITE);
 
         Paint paint = new Paint();
-        paint.setColor(Color.RED);
+        paint.setColor(Color.GRAY);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(4);
-        Log.d("oil-line", String.valueOf(height));
-        Log.d("oil-line", String.valueOf(width));
         canvas.drawLine(0,height,width,height,paint);
+        canvas.drawLine(0,height,0,0,paint);
+
+        Paint pointPaint = new Paint();
+        pointPaint.setColor(Color.BLACK);
+        pointPaint.setStrokeWidth(10);
+        canvas.drawPoint(0,0,pointPaint);
+        canvas.drawPoint(0,height,pointPaint);
+        canvas.drawPoint(width,height,pointPaint);
+
         canvas.save();
     }
 
