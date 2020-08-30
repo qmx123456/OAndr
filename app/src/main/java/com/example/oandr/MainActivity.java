@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static final int lengthEachOilWellInfo = 3;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private String[] charts;
     private Spinner chartChoices;
     private LinePaint chart;
+    private ArrayList<float[]> x;
+    private ArrayList<float[]> y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +52,22 @@ public class MainActivity extends AppCompatActivity {
         String res =  fromFile();
         String[] lines = res.split("\\r?\\n");
         oilWells = new String[lines.length / lengthEachOilWellInfo];
+        x = new ArrayList<float[]>();
+        y = new ArrayList<float[]>();
         for (int i=0;i<oilWells.length;i++){
             oilWells[i] = lines[i*lengthEachOilWellInfo].replace("-","");
+            x.add(getXValues(lines[i * lengthEachOilWellInfo + 1].replace("x", "").trim()));
+            y.add(getXValues(lines[i * lengthEachOilWellInfo + 2].replace("y", "").trim()));
         }
+    }
+
+    private float[] getXValues(String valueString) {
+        String[] xs = valueString.split(" ");
+        float[] xValues = new float[xs.length];
+        for (int j = 0; j<xs.length;j++) {
+            xValues[j] = Float.valueOf(xs[j]);
+        }
+        return xValues;
     }
 
     private String fromFile() {
@@ -88,7 +104,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateAppTitle() {
-        MainActivity.this.setTitle(oilWells[(int) oilWellChoices.getSelectedItemId()] + "-" + charts[(int) chartChoices.getSelectedItemId()]);
+        int selectedItemId = (int) oilWellChoices.getSelectedItemId();
+        MainActivity.this.setTitle(oilWells[selectedItemId] + "-" + charts[(int) chartChoices.getSelectedItemId()]);
+        chart.setPoints(x.get(selectedItemId), y.get(selectedItemId));
     }
 
     private class oidWellsItemSelectedListener implements android.widget.AdapterView.OnItemSelectedListener {

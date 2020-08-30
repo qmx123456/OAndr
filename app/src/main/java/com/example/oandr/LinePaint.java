@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 
 public class LinePaint extends View {
@@ -61,10 +62,12 @@ public class LinePaint extends View {
         textPaint.setStrokeWidth(10);
         textPaint.setTextSize(35);
 
-        XAxis xAxis = new XAxis(xMax, xMin);
+
+        XAxis xAxis = new XAxis(max(x), min(x));
         xAxis.drawDegree(canvas, pointPaint, textPaint);
-        YAxis yAxis = new YAxis(yMax, yMin);
+        YAxis yAxis = new YAxis(max(y), min(y));
         yAxis.drawDegree(canvas, pointPaint, textPaint);
+
         for (int i = 0; i<x.length-1; i++){
             canvas.drawLine(xAxis.getPixel(x[i]), yAxis.getPixel(y[i]),
                     xAxis.getPixel(x[i+1]),yAxis.getPixel(y[i+1]),pointPaint);
@@ -77,7 +80,30 @@ public class LinePaint extends View {
         this.width = width - leftDpTpPx - rightDpToPx;
     }
 
-//TODO XAxis 与YAxis的优化
+    public void setPoints(float[] x, float[] y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    private float max(float[] arr) {
+        float res = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > res) {
+                res = arr[i];
+            }
+        }
+        return res;
+    }
+    private float min(float[] arr) {
+        float min = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+        return min;
+    }
+    //TODO XAxis 与YAxis的优化
     private class XAxis {
         private final float maxDraw;
         private final float minDraw;
@@ -104,7 +130,7 @@ public class LinePaint extends View {
                 canvas.drawPoint(pixel,height,pointPaint);
                 //TODO 优化轴坐标显示位置
                 //TODO 优化坐标的数值
-                canvas.drawText("("+String.format("%.1f", t)+",y)", pixel, height, textPaint);
+                canvas.drawText(String.format("%.1f", t), pixel, height, textPaint);
                 t += interval;
             }
         }
@@ -115,7 +141,7 @@ public class LinePaint extends View {
         private final float minDraw;
         private final float interval;
 
-        public YAxis(int max, int min) {
+        public YAxis(float max, float min) {
             float diff = (max - min)*extraXY;
             maxDraw = max + diff;
             minDraw = min - diff;
@@ -131,7 +157,7 @@ public class LinePaint extends View {
                 canvas.drawPoint(0,pixel,pointPaint);
                 //TODO 优化轴坐标显示位置
                 //TODO 优化坐标的数值
-                canvas.drawText("(x,"+String.format("%.1f", t)+")", 0, pixel, textPaint);
+                canvas.drawText(String.format("%.1f", t), 100, pixel, textPaint);
                 t += interval;
             }
         }
