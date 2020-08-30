@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] oilWells;
     private String[] charts;
     private Spinner chartChoices;
+    private LinePaint chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,17 @@ public class MainActivity extends AppCompatActivity {
         charts = getResources().getStringArray(R.array.charts);
         loadData();
         initWidget();
+        chart = (LinePaint) this.findViewById(R.id.chart);
+
+        ViewTreeObserver vto = chart.getViewTreeObserver();
+        vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            public boolean onPreDraw() {
+                int height = chart.getMeasuredHeight();
+                int width = chart.getMeasuredWidth();
+                chart.setHeight(height);
+                return true;
+            }
+        });
     }
 
     private void loadData() {
