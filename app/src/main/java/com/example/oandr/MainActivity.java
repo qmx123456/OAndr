@@ -3,10 +3,7 @@ package com.example.oandr;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -103,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         oilWellChoices.setAdapter(adapter);
     }
 
-    private void updateAppTitle() {
+    private void updateView() {
         int selectedItemId = (int) oilWellChoices.getSelectedItemId();
         MainActivity.this.setTitle(oilWells[selectedItemId] + "-" + charts[(int) chartChoices.getSelectedItemId()]);
         chart.setPoints(x.get(selectedItemId), y.get(selectedItemId));
@@ -112,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     private class oidWellsItemSelectedListener implements android.widget.AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            updateAppTitle();
+            updateView();
         }
 
         @Override
@@ -124,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     private class chartItemSelectedListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            updateAppTitle();
+            updateView();
         }
 
         @Override
