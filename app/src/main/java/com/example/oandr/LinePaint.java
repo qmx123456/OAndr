@@ -8,14 +8,19 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 public class LinePaint extends View {
 
+    private final int yMax = 5;
+    private final int yMin = 1;
     private float width;
     private float height;
+    private float[] x = new float[]{1,2,3,4,5};
+    private float[] y = new float[]{1,2,3,4,5};
+    private float xMin = 1;
+    private float xMax = 5;
+    private float extraXY = 0.1f;
     private final float leftDpTpPx;
     private final float rightDpToPx;
     private final float topDpToPx;
@@ -51,11 +56,65 @@ public class LinePaint extends View {
         Paint pointPaint = new Paint();
         pointPaint.setColor(Color.BLACK);
         pointPaint.setStrokeWidth(10);
-        canvas.drawPoint(0,0,pointPaint);
-        canvas.drawPoint(0,height,pointPaint);
-        canvas.drawPoint(width,height,pointPaint);
+
+        Paint textPaint = new Paint();
+        textPaint.setColor(Color.BLACK);
+        textPaint.setStrokeWidth(10);
+        textPaint.setTextSize(35);
+
+        drawXDegree(canvas, pointPaint, textPaint, xMax, xMin);
+        drawYDegree(canvas,pointPaint,textPaint, yMax, yMin);
+        for (int i = 0; i<x.length-1; i++){
+//            canvas.drawLine(getXPixel(x[i]), getYPixel(y[i]),x[i+1],y[i+1],pointPaint);
+        }
 
         canvas.save();
+    }
+
+    private void drawXDegree(Canvas canvas, Paint pointPaint, Paint textPaint, float max, float min) {
+        float diff = (max - min)*extraXY;
+        float maxDraw = max + diff;
+        float minDraw = min - diff;
+
+        float countMax = width / 150;
+        //TODO 优化间隔的取值
+        float interval = (maxDraw - minDraw) / countMax;
+        float t = interval*((int)Math.ceil(minDraw/interval)+1)-minDraw;
+        while (t < maxDraw){
+            float pixel = getXPixel(maxDraw, minDraw, t);
+            canvas.drawPoint(pixel,height,pointPaint);
+            //TODO 优化轴坐标显示位置
+            //TODO 优化坐标的数值
+            canvas.drawText("("+String.format("%.1f", t)+",y)", pixel, height, textPaint);
+            t += interval;
+        }
+    }
+
+    private float getXPixel(float maxDraw, float minDraw, float t) {
+        return (t-minDraw) * width / (maxDraw - minDraw);
+    }
+
+    private void drawYDegree(Canvas canvas, Paint pointPaint, Paint textPaint, float max, float min) {
+        float diff = (max - min)*extraXY;
+        float maxDraw = max + diff;
+        float minDraw = min - diff;
+
+        float countMax = height / 150;
+        //TODO 优化间隔的取值
+        float interval = (maxDraw - minDraw) / countMax;
+        float t = interval*((int)Math.ceil(minDraw/interval)+1)-minDraw;
+        while (t < maxDraw){
+            float pixel = getYPixel(maxDraw, minDraw, t);
+            canvas.drawPoint(0,pixel,pointPaint);
+            //TODO 优化轴坐标显示位置
+            //TODO 优化坐标的数值
+            canvas.drawText("(x,"+String.format("%.1f", t)+")", 0, pixel, textPaint);
+            t += interval;
+        }
+    }
+
+    private float getYPixel(float maxDraw, float minDraw, float t) {
+        return height - (t-minDraw) * height / (maxDraw - minDraw);
     }
 
     public void setSize(int width, int height) {
