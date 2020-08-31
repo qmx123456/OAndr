@@ -58,14 +58,14 @@ public class LinePaint extends View {
         textPaint.setColor(Color.BLACK);
         textPaint.setTextSize(35);
 
-        canvas.drawLine(0,height,width,height,axisLinePaint);
-        canvas.drawLine(0,height,0,0,axisLinePaint);
-
-        AbsAxis xAxis = new XAxis(max(x), min(x),width);
+        AbsAxis xAxis = new XAxis(width, LinePaint.this.height, min(x), max(x));
+        xAxis.drawAxisLine(canvas, axisLinePaint);
         xAxis.drawDegree(canvas, pointPaint, textPaint);
-        AbsAxis yAxis = new YAxis(max(y), min(y), height);
+        AbsAxis yAxis = new YAxis(LinePaint.this.width, height, min(y), max(y));
+        yAxis.drawAxisLine(canvas, axisLinePaint);
         yAxis.drawDegree(canvas, pointPaint, textPaint);
 
+        //TODO only one point
         for (int i = 0; i<x.length-1; i++){
             canvas.drawLine(xAxis.getPixelFrom(x[i]), yAxis.getPixelFrom(y[i]),
                     xAxis.getPixelFrom(x[i+1]),yAxis.getPixelFrom(y[i+1]),pointPaint);
@@ -93,60 +93,74 @@ public class LinePaint extends View {
         return res;
     }
     private float min(float[] arr) {
-        float min = arr[0];
+        float res = arr[0];
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] < min) {
-                min = arr[i];
+            if (arr[i] < res) {
+                res = arr[i];
             }
         }
-        return min;
+        return res;
     }
-    //TODO XAxis 与YAxis的优化
+    //TODO XAxis与YAxis的优化
     private class XAxis extends AbsAxis {
-        public XAxis(float max, float min, float width) {
-            super(max, min, width);
+        private float width;
+        private float height;
+        public XAxis(float width, float height, float min, float max) {
+            super(width, min, max);
+            this.width = width;
+            this.height = height;
         }
         @Override
-        protected float getPixelFrom(float degree) {
-            return (degree -minDraw) * length / (maxDraw - minDraw);
+        float getPixelFrom(float degree) {
+            return (degree -minDraw) * width / (maxDraw - minDraw);
         }
-
-        protected void draw(Canvas canvas, Paint pointPaint, Paint textPaint, float degree, float position) {
-            canvas.drawPoint(position,height,pointPaint);
-            canvas.drawText(String.format("%.1f", degree), position, height, textPaint);
+        @Override
+        float[] buildCoordinate(float position) {
+            return new float[]{position, this.height};
+        }
+        @Override
+        void drawAxisLine(Canvas canvas, Paint paint) {
+            canvas.drawLine(0,height,width,height, paint);
         }
     }
 
     private class YAxis extends AbsAxis {
-        public YAxis(float max, float min, float height){
-            super(max, min, height);
+        private final float height;
+        private final float width;
+        public YAxis(float width, float height, float min, float max){
+            super(height, min, max);
+            this.height = height;
+            this.width = width;
         }
 
         @Override
-        protected float getPixelFrom(float degree) {
-            return length - (degree -minDraw) * length / (maxDraw - minDraw);
+        float getPixelFrom(float degree) {
+            return height - (degree -minDraw) * height / (maxDraw - minDraw);
         }
-        protected void draw(Canvas canvas, Paint pointPaint, Paint textPaint, float degree, float position) {
-            canvas.drawPoint(0,position,pointPaint);
-            canvas.drawText(String.format("%.1f", degree), 0, position, textPaint);
+        @Override
+        float[] buildCoordinate(float position) {
+            return new float[]{0, position};
+        }
+
+        @Override
+        void drawAxisLine(Canvas canvas, Paint paint) {
+            canvas.drawLine(0,height,0,0, paint);
         }
     }
 
     private abstract class AbsAxis {
-        private final int intervalPixel = 150;;
+        private final int intervalPixel = 150;
         private final float extra = 0.1f;
         protected final float maxDraw;
         protected final float minDraw;
         protected final float interval;
-        protected final float length;
 
-        public AbsAxis(float max, float min, float length) {
+        public AbsAxis(float length, float min, float max) {
             float diff = (max - min)* extra;
             maxDraw = max + diff;
             minDraw = min - diff;
             //TODO 优化间隔的取值
-            this.length = length;
-            interval = (maxDraw - minDraw) / (this.length / intervalPixel);
+            interval = (maxDraw - minDraw) / (length / intervalPixel);
         }
 
         protected void drawDegree(Canvas canvas, Paint pointPaint, Paint textPaint) {
@@ -155,11 +169,14 @@ public class LinePaint extends View {
             while (degree < maxDraw){
                 //TODO 优化轴坐标显示位置
                 float position = getPixelFrom(degree);
-                draw(canvas, pointPaint, textPaint, degree, position);
+                float[] pos = buildCoordinate(position);
+                canvas.drawPoint(pos[0],pos[1], pointPaint);
+                canvas.drawText(String.format("%.1f", degree), pos[0],pos[1], textPaint);
                 degree += interval;
             }
         }
-        abstract void draw(Canvas canvas, Paint pointPaint, Paint textPaint, float degree, float position);
         abstract float getPixelFrom(float degree);
+        abstract float[] buildCoordinate(float position);
+        abstract void drawAxisLine(Canvas canvas, Paint paint);
     }
 }
