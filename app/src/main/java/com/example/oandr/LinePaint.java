@@ -9,6 +9,10 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 
+import com.qmx.draw.AbsAxis;
+import com.qmx.draw.XAxis;
+import com.qmx.draw.YAxis;
+
 public class LinePaint extends View {
 
     private float width;
@@ -58,10 +62,10 @@ public class LinePaint extends View {
         textPaint.setColor(Color.BLACK);
         textPaint.setTextSize(35);
 
-        AbsAxis xAxis = new XAxis(width, LinePaint.this.height, min(x), max(x));
+        AbsAxis xAxis = new XAxis(width, this.height, min(x), max(x));
         xAxis.drawAxisLine(canvas, axisLinePaint);
         xAxis.drawDegree(canvas, pointPaint, textPaint);
-        AbsAxis yAxis = new YAxis(LinePaint.this.width, height, min(y), max(y));
+        AbsAxis yAxis = new YAxis(this.width, height, min(y), max(y));
         yAxis.drawAxisLine(canvas, axisLinePaint);
         yAxis.drawDegree(canvas, pointPaint, textPaint);
 
@@ -101,82 +105,5 @@ public class LinePaint extends View {
         }
         return res;
     }
-    //TODO XAxis与YAxis的优化
-    private class XAxis extends AbsAxis {
-        private float width;
-        private float height;
-        public XAxis(float width, float height, float min, float max) {
-            super(width, min, max);
-            this.width = width;
-            this.height = height;
-        }
-        @Override
-        float getPixelFrom(float degree) {
-            return (degree -minDraw) * width / (maxDraw - minDraw);
-        }
-        @Override
-        float[] buildCoordinate(float position) {
-            return new float[]{position, this.height};
-        }
-        @Override
-        void drawAxisLine(Canvas canvas, Paint paint) {
-            canvas.drawLine(0,height,width,height, paint);
-        }
-    }
 
-    private class YAxis extends AbsAxis {
-        private final float height;
-        private final float width;
-        public YAxis(float width, float height, float min, float max){
-            super(height, min, max);
-            this.height = height;
-            this.width = width;
-        }
-
-        @Override
-        float getPixelFrom(float degree) {
-            return height - (degree -minDraw) * height / (maxDraw - minDraw);
-        }
-        @Override
-        float[] buildCoordinate(float position) {
-            return new float[]{0, position};
-        }
-
-        @Override
-        void drawAxisLine(Canvas canvas, Paint paint) {
-            canvas.drawLine(0,height,0,0, paint);
-        }
-    }
-
-    private abstract class AbsAxis {
-        private final int intervalPixel = 150;
-        private final float extra = 0.1f;
-        protected final float maxDraw;
-        protected final float minDraw;
-        protected final float interval;
-
-        public AbsAxis(float length, float min, float max) {
-            float diff = (max - min)* extra;
-            maxDraw = max + diff;
-            minDraw = min - diff;
-            //TODO 优化间隔的取值
-            interval = (maxDraw - minDraw) / (length / intervalPixel);
-        }
-
-        protected void drawDegree(Canvas canvas, Paint pointPaint, Paint textPaint) {
-            //TODO 优化坐标的数值
-            float degree = interval*((int)Math.floor(minDraw/interval)+1);
-            while (degree < maxDraw){
-                //TODO 优化轴坐标显示位置
-                float position = getPixelFrom(degree);
-                float[] pos = buildCoordinate(position);
-                canvas.drawPoint(pos[0],pos[1], pointPaint);
-                canvas.drawText(String.format("%.1f", degree), pos[0],pos[1], textPaint);
-                degree += interval;
-            }
-        }
-        abstract float getPixelFrom(float degree);
-        abstract float[] buildCoordinate(float position);
-        abstract void drawAxisLine(Canvas canvas, Paint paint);
-    }
 }
