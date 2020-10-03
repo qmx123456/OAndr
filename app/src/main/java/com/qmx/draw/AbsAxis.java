@@ -4,8 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 public abstract class AbsAxis {
-    private final int intervalPixel = 300;
-    private final float extra = 0.1f;
+    private final int intervalPixel = 300;//magic num
+    private final float extra = 0.1f;//magic num
     protected final float maxDraw;
     protected final float minDraw;
     protected final float interval;
