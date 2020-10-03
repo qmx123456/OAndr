@@ -60,7 +60,7 @@ public class LinePaint extends View {
 
         Paint textPaint = new Paint();
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(35);
+        textPaint.setTextSize(50);
 
         AbsAxis xAxis = new XAxis(width, this.height, min(x), max(x));
         xAxis.drawAxisLine(canvas, axisLinePaint);

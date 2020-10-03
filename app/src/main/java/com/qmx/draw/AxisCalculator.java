@@ -1,4 +1,4 @@
-package drawOAndr;
+package com.qmx.draw;
 
 public class AxisCalculator {
 	private static final float[] BaseIntervals = { 1, 2, 2.5f, 5 };
