@@ -26,7 +26,7 @@ public abstract class AbsAxis {
             float[] pos = buildCoordinate(position);
             canvas.drawPoint(pos[0],pos[1], pointPaint);
             //TODO magic constant
-            canvas.drawText(String.format("%.1f", degree), pos[0],pos[1], textPaint);
+            canvas.drawText(String.format("%.3f", degree), pos[0],pos[1], textPaint);
             degree += interval;
         }
     }
