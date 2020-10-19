@@ -9,6 +9,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
@@ -46,6 +47,25 @@ public class MainActivity extends AppCompatActivity {
 
         LineChartData data = new LineChartData();
         data.setLines(lines);
+        //TODO 反思,坐标应该具备哪些属性,及其原因,建立线性图形,完整的属性模型
+        //TODO 弄清,各个属性的默认值,及其在绘制过程的应用
+        Axis axisX = new Axis(); //X轴
+        axisX.setHasTiltedLabels(true);  //X坐标轴字体是斜的显示还是直的，默认false直的显示
+        axisX.setTextColor(Color.GRAY);  //设置字体颜色,默认Color.LTGRAY
+        axisX.setName("x轴");  //坐标轴名称
+        axisX.setTextSize(10);//设置字体(刻度\坐标轴名称)大小,默认12
+//      axisX.setMaxLabelChars(8);//设置最多的刻度数,默认是?,可能是绘制的时候确定的,需要验证
+        axisX.setHasLines(true); //x 轴分割线,默认false不显示分割线
+        data.setAxisXTop(axisX);  //x 轴在顶部
+        data.setAxisXBottom(axisX); //x 轴在底部
+
+        Axis axisY = new Axis();//Y轴
+        axisY.setName("");//y轴标注
+        axisY.setTextSize(10);//设置字体大小
+        axisY.setHasLines(true);
+        data.setAxisYLeft(axisY);  //Y轴设置在左边
+        data.setAxisYRight(axisY);  //y轴设置在右边
+
 
         LineChartView chart = (LineChartView)this.findViewById(R.id.chart);
         chart.setLineChartData(data);
