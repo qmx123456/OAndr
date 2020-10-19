@@ -5,15 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import lecho.lib.hellocharts.gesture.ContainerScrollType;
+import lecho.lib.hellocharts.gesture.ZoomType;
+import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.ValueShape;
+import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         line.setShape(ValueShape.DIAMOND);//设置点的形状，默认是CIRCLE
         line.setCubic(false);//曲线是否平滑，即是曲线还是折线，默认是true平滑拟合的
         line.setFilled(true);//是否填充曲线的面积，默认false不填充
-//        line.setHasLabels(true);//曲线的数据坐标是否加上备注，默认false不显示备注
-        line.setHasLabelsOnlyForSelected(true);//点击"点"时,显示坐标值,默认false不显示
+        line.setHasLabels(true);//曲线的数据坐标是否加上备注，默认false不显示备注
+//        line.setHasLabelsOnlyForSelected(true);//点击"点"时,显示坐标值,默认false不显示
         line.setHasLines(true);//是否连接成线,默认true连成线
         line.setHasPoints(true);//是否突显数据点,默认是true突显数据点
 
@@ -47,8 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         LineChartData data = new LineChartData();
         data.setLines(lines);
-        //TODO 反思,坐标应该具备哪些属性,及其原因,建立线性图形,完整的属性模型
+        //TODO 反思整理:线条的属性,并完善线条的相关属性
+        //TODO 反思整理,坐标应该具备哪些属性,及其原因,建立线性图形,完整的属性模型
         //TODO 弄清,各个属性的默认值,及其在绘制过程的应用
+        //TODO 待处理缺陷:太小坐标显示不全
+        //TODO 待处理缺陷:平滑连线,会让部分线条离开显示区,出现断线的现象
+        //TODO 增加鼠标动作
         Axis axisX = new Axis(); //X轴
         axisX.setHasTiltedLabels(true);  //X坐标轴字体是斜的显示还是直的，默认false直的显示
         axisX.setTextColor(Color.GRAY);  //设置字体颜色,默认Color.LTGRAY
@@ -67,7 +76,32 @@ public class MainActivity extends AppCompatActivity {
         data.setAxisYRight(axisY);  //y轴设置在右边
 
 
-        LineChartView chart = (LineChartView)this.findViewById(R.id.chart);
-        chart.setLineChartData(data);
+        LineChartView lineChart = (LineChartView)this.findViewById(R.id.chart);
+
+        //设置行为属性，支持缩放、滑动以及平移
+        lineChart.setInteractive(true);
+        lineChart.setZoomType(ZoomType.HORIZONTAL);
+        lineChart.setMaxZoom((float) 2);//最大方法比例
+        lineChart.setContainerScrollEnabled(true, ContainerScrollType.HORIZONTAL);
+        lineChart.setVisibility(View.VISIBLE);
+        lineChart.setLineChartData(data);
+
+        lineChart.setOnValueTouchListener(new LineChartOnValueSelectListener() {
+            @Override
+            public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
+                Toast.makeText(MainActivity.this, ""+value.getY(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onValueDeselected() {
+
+            }
+        });
+        lineChart.setVisibility(View.VISIBLE);
+
+        Viewport v = new Viewport(lineChart.getMaximumViewport());
+        v.left = 0;
+        v.right = 7;
+        lineChart.setCurrentViewport(v);
     }
 }
