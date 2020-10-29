@@ -55,9 +55,10 @@ public class MainActivity extends AppCompatActivity {
         //TODO 反思整理:线条的属性,并完善线条的相关属性
         //TODO 反思整理,坐标应该具备哪些属性,及其原因,建立线性图形,完整的属性模型
         //TODO 弄清,各个属性的默认值,及其在绘制过程的应用
-        //TODO 待处理缺陷:太小坐标显示不全
+        //TODO 待处理缺陷:坐标数值太小，显示不全，仅仅显示整数
         //TODO 待处理缺陷:平滑连线,会让部分线条离开显示区,出现断线的现象
         //TODO 增加鼠标动作
+        //TODO 如何生成gradle包，方便导入自定义绘图包
         Axis axisX = new Axis(); //X轴
         axisX.setHasTiltedLabels(true);  //X坐标轴字体是斜的显示还是直的，默认false直的显示
         axisX.setTextColor(Color.GRAY);  //设置字体颜色,默认Color.LTGRAY
