@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        Glide.with(this).load(R.mipmap.heng_3).into(basicImage);
+//        Glide.with(this).load(R.mipmap.heng_3).into(basicImage);//加载图片，可省略
     }
 
     @Override
@@ -45,7 +45,8 @@ public class MainActivity extends BaseActivity {
         switch (v.getId()){
             case R.id.cv_main_basic:
                 Intent i1 = new Intent(this, BasicUseActivity.class);
-                startActivity(i1, ActivityOptions.makeSceneTransitionAnimation(this, basicCard,"basic").toBundle());
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, basicCard, this.getString(R.string.basic));
+                startActivity(i1, activityOptions.toBundle());
                 break;
         }
     }

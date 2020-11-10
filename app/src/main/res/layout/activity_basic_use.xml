@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:transitionName="basic">
+        android:transitionName="@string/basic">
         <ImageView
             android:id="@+id/iv_basic_title"
             android:layout_width="match_parent"

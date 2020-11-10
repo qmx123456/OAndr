@@ -8,11 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".MainActivityTableLayout"></activity>
-        <activity android:name=".MainActivityRelativeLayout" />
-        <activity android:name=".MainActivityLinearLayout" />
-        <activity android:name=".ui.activity.other.BasicUseActivity" />
+        android:theme="@style/Theme.OAndr">
+        <activity android:name=".ui.activity.other.BasicUseActivity"
+            android:theme="@style/NoAction"/>
         <activity android:name=".ui.activity.chart.LineChartActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

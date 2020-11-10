@@ -15,9 +15,9 @@
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:foreground="?android:attr/selectableItemBackground"
-        android:transitionName="basic"
         app:cardCornerRadius="6dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        android:transitionName="@string/basic">
 
         <ImageView
             android:id="@+id/iv_main_basic"
@@ -25,8 +25,7 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:scaleType="centerCrop"
-            android:src="@mipmap/heng_3"
-            />
+            android:src="@mipmap/heng_3"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

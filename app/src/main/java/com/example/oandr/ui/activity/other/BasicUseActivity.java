@@ -29,29 +29,14 @@ public class BasicUseActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
-
-//        getSupportActionBar().hide();//隐藏标题栏
         titileImage = (ImageView) findViewById(R.id.iv_basic_title);
 
         lineCardView = (CardView) findViewById(R.id.cv_line_chart);
         lineImage = (ImageView) findViewById(R.id.iv_line_chart);
     }
-    protected void hideUIMenu() {
-        //去掉系统自带的导航栏，隐藏虚拟按键，并且全屏
-        View decorView = this.getWindow().getDecorView();
-        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
-            decorView.setSystemUiVisibility(View.GONE);
-        } else if (Build.VERSION.SDK_INT >= 19) {
-            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
-
-            decorView.setSystemUiVisibility(uiOptions);
-        }
-    }
     @Override
     public void initData() {
-        Glide.with(this).load(R.mipmap.heng_3).into(titileImage);
+//        Glide.with(this).load(R.mipmap.heng_3).into(titileImage);//加载图片，可省略
     }
 
     @Override
