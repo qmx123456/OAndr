@@ -3,6 +3,7 @@ package com.example.oandr.ui.activity.other;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -39,9 +40,10 @@ public class MainActivity extends BaseActivity {
         basicCard.setOnClickListener(this);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void processClick(View v) {
+        Log.e("qmx", String.valueOf(Build.VERSION_CODES.LOLLIPOP));
         switch (v.getId()){
             case R.id.cv_main_basic:
                 Intent i1 = new Intent(this, BasicUseActivity.class);

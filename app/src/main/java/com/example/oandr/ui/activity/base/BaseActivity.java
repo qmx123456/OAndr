@@ -24,9 +24,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            default:processClick(v);break;
-        }
+        processClick(v);
+//        switch (v.getId()){
+//            default:processClick(v);break;
+//        }
     }
 
     protected void basetToast(String msg){
