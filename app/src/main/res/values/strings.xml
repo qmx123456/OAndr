@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Welcome</string>
     <string name="basic">basic</string>
+    <string name="LineChartsBarName">Line Charts</string>
+    <string name="Line">line</string>
 </resources>

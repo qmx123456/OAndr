@@ -4,14 +4,11 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 
-import com.bumptech.glide.Glide;
 import com.example.oandr.R;
 import com.example.oandr.ui.activity.base.BaseActivity;
 import com.example.oandr.ui.activity.chart.LineChartActivity;
@@ -50,7 +47,8 @@ public class BasicUseActivity extends BaseActivity {
         switch (v.getId()){
             case R.id.cv_line_chart:
                 Intent i1 = new Intent(this, LineChartActivity.class);
-                startActivity(i1, ActivityOptions.makeSceneTransitionAnimation(this, lineImage, "line").toBundle());
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, lineImage, getString(R.string.Line));
+                startActivity(i1, activityOptions.toBundle());
                 break;
         }
     }

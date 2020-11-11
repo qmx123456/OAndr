@@ -11,7 +11,8 @@
         android:theme="@style/Theme.OAndr">
         <activity android:name=".ui.activity.other.BasicUseActivity"
             android:theme="@style/NoAction"/>
-        <activity android:name=".ui.activity.chart.LineChartActivity" />
+        <activity android:name=".ui.activity.chart.LineChartActivity"
+            android:label="@string/LineChartsBarName"/>
         <activity android:name=".ui.activity.other.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
