@@ -1,16 +1,15 @@
 package com.example.oandr.ui.activity.other;
 
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 
-import com.bumptech.glide.Glide;
 import com.example.oandr.R;
 import com.example.oandr.ui.activity.base.BaseActivity;
 
@@ -40,16 +39,22 @@ public class MainActivity extends BaseActivity {
         basicCard.setOnClickListener(this);
     }
 
-//    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)//要求api至少为21
     @Override
     public void processClick(View v) {
-        Log.e("qmx", String.valueOf(Build.VERSION_CODES.LOLLIPOP));
-        switch (v.getId()){
-            case R.id.cv_main_basic:
-                Intent i1 = new Intent(this, BasicUseActivity.class);
-                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, basicCard, this.getString(R.string.basic));
-                startActivity(i1, activityOptions.toBundle());
-                break;
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            switch (v.getId()){
+                case R.id.cv_main_basic:
+                    Intent i1 = new Intent(this, BasicUseActivity.class);
+                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, basicCard, this.getString(R.string.basic));
+                    startActivity(i1, activityOptions.toBundle());
+                    break;
+            }
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("版本过低");
+            builder.setMessage("版本太低，系统暂不支持!");
+            builder.show();
         }
     }
 }

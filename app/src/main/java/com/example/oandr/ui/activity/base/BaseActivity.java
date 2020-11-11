@@ -1,10 +1,7 @@
 package com.example.oandr.ui.activity.base;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -25,9 +22,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         processClick(v);
-//        switch (v.getId()){
-//            default:processClick(v);break;
-//        }
     }
 
     protected void basetToast(String msg){
