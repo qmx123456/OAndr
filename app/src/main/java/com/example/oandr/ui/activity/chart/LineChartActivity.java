@@ -1,8 +1,6 @@
 package com.example.oandr.ui.activity.chart;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,18 +25,25 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class LineChartActivity extends BaseActivity {
     private LineChartView mLineChartView;
-    private int maxNumberOfLines = 4;
-    private int numberOfPoints = 12;
-    private float[][] randomNumbersTab = new float[maxNumberOfLines][numberOfPoints];
-    private ValueShape pointsShape = ValueShape.CIRCLE;
-    private boolean doesHaveLine = true;
-    private boolean doesHavePoints = true;
-    private boolean isCubic = true;
-    private boolean isFilled = false;
-    private boolean doesHavePointLabels = false;
-    private boolean doesPointHaveSelected = true;
-    private boolean doPointsHaveDifferentColor = false;
+
+    //数据
     private LineChartData mLineData;
+    private int numberOfPoints = 12;
+    private int maxNumberOfLines = 1;
+    private float[][] randomNumbersTab = new float[maxNumberOfLines][numberOfPoints];
+
+    private int numberOfLines = 1;
+    //属性
+    private boolean doesHaveLine = true;
+    private boolean isCubic = false;
+    private boolean isFilled = false;
+
+    private boolean doesHavePoints = true;
+    private ValueShape pointsShape = ValueShape.CIRCLE;
+    private boolean doesHavePointLabels = false;
+    private boolean doesPointHaveLabelForSelected = true;
+
+    private boolean doPointsHaveDifferentColor = false;
     private boolean doesHaveAxes = true;
     private boolean doesHaveAxisNames = true;
 
@@ -72,7 +77,7 @@ public class LineChartActivity extends BaseActivity {
 
     private void setLinesDatas() {
         ArrayList<Line> lines = new ArrayList<>();
-        for (int i = 0; i < maxNumberOfLines; i++) {
+        for (int i = 0; i < numberOfLines; i++) {
             ArrayList<PointValue> values = new ArrayList<>();
             for (int j = 0; j < numberOfPoints; j++) {
                 values.add(new PointValue(j, randomNumbersTab[i][j]));
@@ -85,7 +90,7 @@ public class LineChartActivity extends BaseActivity {
             line.setCubic(isCubic);
             line.setFilled(isFilled);
             line.setHasLabels(doesHavePointLabels);
-            line.setHasLabelsOnlyForSelected(doesPointHaveSelected);
+            line.setHasLabelsOnlyForSelected(doesPointHaveLabelForSelected);
             if (doPointsHaveDifferentColor) {
                 line.setPointColor(ChartUtils.COLORS[(i + 1) % ChartUtils.COLORS.length]);
             }
@@ -160,7 +165,7 @@ public class LineChartActivity extends BaseActivity {
     }
 
     private void resetLines() {
-        maxNumberOfLines = 1;
+        numberOfLines = 1;
         doesHaveAxisNames = true;
         doesHaveLine = true;
         doesHavePoints = true;
@@ -168,7 +173,7 @@ public class LineChartActivity extends BaseActivity {
         isFilled = false;
         doesHavePointLabels = false;
         isCubic = false;
-        doesPointHaveSelected = false;
+        doesPointHaveLabelForSelected = false;
         doPointsHaveDifferentColor = false;
 
         mLineChartView.setInteractive(true);
@@ -181,7 +186,7 @@ public class LineChartActivity extends BaseActivity {
 //            timer = new Timer();
 //        }
 
-        mLineChartView.setValueSelectionEnabled(doesPointHaveSelected);
+        mLineChartView.setValueSelectionEnabled(doesPointHaveLabelForSelected);
         resetViewport();
         setLinesDatas();
     }
