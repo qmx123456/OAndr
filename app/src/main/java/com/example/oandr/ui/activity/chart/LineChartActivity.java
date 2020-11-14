@@ -1,8 +1,14 @@
 package com.example.oandr.ui.activity.chart;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.oandr.R;
 import com.example.oandr.ui.activity.base.BaseActivity;
@@ -87,10 +93,18 @@ public class LineChartActivity extends BaseActivity {
         }
         mLineData = new LineChartData(lines);
         mLineData.setBaseValue(Float.NEGATIVE_INFINITY);//奇怪的设置
+        /* 其他的属性方法
+        mLineData.setValueLabelBackgroundAuto(false);
+        mLineData.setValueLabelBackgroundColor(Color.BLUE);
+        mLineData.setValueLabelBackgroundEnabled(true);
+        mLineData.setValueLabelsTextColor(Color.RED);
+        mLineData.setValueLabelTextSize(30);
+        mLineData.setValueLabelTypeface(Typeface.MONOSPACE);
+        */
         if(doesHaveAxes){
             Axis axisX = new Axis();
             axisX.setTextColor(Color.GRAY);
-            Axis axisY = new Axis();
+            Axis axisY = new Axis().setHasLines(true);
             axisY.setTextColor(Color.GRAY);
 
             if(doesHaveAxisNames){
@@ -110,7 +124,7 @@ public class LineChartActivity extends BaseActivity {
     private void initPointValues() {
         for (int i = 0; i < maxNumberOfLines; i++) {
             for (int j = 0; j < numberOfPoints; j++) {
-                randomNumbersTab[i][j] = (float) Math.random() * 100f;
+                randomNumbersTab[i][j] = (float) Math.random()*100;
             }
         }
     }
@@ -120,7 +134,9 @@ public class LineChartActivity extends BaseActivity {
         mLineChartView.setOnValueTouchListener(new LineChartOnValueSelectListener() {
             @Override
             public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
-                Toast.makeText(LineChartActivity.this, "选中第"+(1+pointIndex)+"个节点", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LineChartActivity.this,
+                        "选中第"+(lineIndex+1)+"条线，第"+(1+pointIndex)+"个节点\r\n"+"其坐标为("+value.getX()+", "+value.getY()+")",
+                        Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -133,5 +149,46 @@ public class LineChartActivity extends BaseActivity {
     @Override
     public void processClick(View v) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_line_reset: resetLines(); return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void resetLines() {
+        maxNumberOfLines = 1;
+        doesHaveAxisNames = true;
+        doesHaveLine = true;
+        doesHavePoints = true;
+        pointsShape = ValueShape.CIRCLE;
+        isFilled = false;
+        doesHavePointLabels = false;
+        isCubic = false;
+        doesPointHaveSelected = false;
+        doPointsHaveDifferentColor = false;
+
+        mLineChartView.setInteractive(true);
+//        position = 0 ;
+//        pointValueList.clear();
+//        lineChartData.clear();
+
+//        if(timer != null){
+//            timer.cancel();
+//            timer = new Timer();
+//        }
+
+        mLineChartView.setValueSelectionEnabled(doesPointHaveSelected);
+        resetViewport();
+        setLinesDatas();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_line_chart, menu);
+        return true;
     }
 }
