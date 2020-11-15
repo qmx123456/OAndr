@@ -55,4 +55,28 @@
         android:id="@+id/menu_line_diamond_point"
         android:title="菱形节点"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_animation"
+        android:title="切换动画"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_select_show_label"
+        android:title="点击节点显示标签"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_view_touch_zoom"
+        android:title="缩放图表"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_view_touch_zoom_xy"
+        android:title="XY方向缩放"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_view_touch_zoom_x"
+        android:title="X方向缩放"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_view_touch_zoom_y"
+        android:title="Y方向缩放"
+        app:showAsAction="never"/>
 </menu>

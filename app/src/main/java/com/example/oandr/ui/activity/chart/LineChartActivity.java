@@ -13,6 +13,7 @@ import com.example.oandr.ui.activity.base.BaseActivity;
 
 import java.util.ArrayList;
 
+import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
@@ -48,6 +49,9 @@ public class LineChartActivity extends BaseActivity {
     private boolean doesHaveAxisNames = true;
     private boolean enableValueSelection = false;
 
+    private boolean enableZoom = true;
+    private ZoomType zoomType = ZoomType.HORIZONTAL_AND_VERTICAL;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_line_chart;
@@ -57,6 +61,7 @@ public class LineChartActivity extends BaseActivity {
     public void initView() {
         mLineChartView = (LineChartView) findViewById(R.id.lvc_main);
         mLineChartView.setViewportCalculationEnabled(false);//禁用视图重新计算，动态更改-待查证
+
     }
 
     @Override
@@ -126,7 +131,8 @@ public class LineChartActivity extends BaseActivity {
 
         mLineChartView.setLineChartData(mLineData);
         mLineChartView.setValueSelectionEnabled(enableValueSelection);
-
+        mLineChartView.setZoomEnabled(enableZoom);
+        mLineChartView.setZoomType(zoomType);
     }
 
     private void initPointValues() {
@@ -175,8 +181,32 @@ public class LineChartActivity extends BaseActivity {
             case R.id.menu_line_circle_point: circlePoint(); return true;
             case R.id.menu_line_square_point: squarePoint(); return true;
             case R.id.menu_line_diamond_point: diamondPoint(); return true;
+            case R.id.menu_animation: animation(); return true;
+            case R.id.menu_line_select_show_label: showLabelForSelect(); return true;
+            case R.id.menu_view_touch_zoom: enableZoom =!enableZoom;mLineChartView.setZoomEnabled(enableZoom);return true;
+            case R.id.menu_view_touch_zoom_xy:zoomType = ZoomType.HORIZONTAL_AND_VERTICAL;mLineChartView.setZoomType(zoomType);return true;
+            case R.id.menu_view_touch_zoom_x:zoomType = ZoomType.HORIZONTAL;mLineChartView.setZoomType(zoomType);return true;
+            case R.id.menu_view_touch_zoom_y:zoomType = ZoomType.VERTICAL; mLineChartView.setZoomType(zoomType);return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showLabelForSelect() {
+        doesPointHaveLabelForSelected = !doesPointHaveLabelForSelected;
+        enableValueSelection = doesPointHaveLabelForSelected;
+        if (doesPointHaveLabelForSelected){
+            doesHavePointLabels = false;
+        }
+        setLinesDatas();
+    }
+
+    private void animation() {
+        for(Line line: mLineData.getLines()){
+            for(PointValue value: line.getValues()){
+                value.setTarget(value.getX(), (float)Math.random()*100);
+            }
+        }
+        mLineChartView.startDataAnimation();
     }
 
     private void diamondPoint() {
@@ -261,6 +291,8 @@ public class LineChartActivity extends BaseActivity {
         doPointsHaveDifferentColor = false;
 
         enableValueSelection = false;
+        enableZoom = true;
+        zoomType =  ZoomType.HORIZONTAL_AND_VERTICAL;
         mLineChartView.setInteractive(true);//神奇的设置
 //        position = 0 ;
 //        pointValueList.clear();
