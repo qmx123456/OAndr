@@ -12,6 +12,9 @@ import com.example.oandr.R;
 import com.example.oandr.ui.activity.base.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
@@ -52,6 +55,7 @@ public class LineChartActivity extends BaseActivity {
     private boolean enableZoom = true;
     private ZoomType zoomType = ZoomType.HORIZONTAL_AND_VERTICAL;
 
+    Timer timer = new Timer();
     @Override
     public int getLayoutId() {
         return R.layout.activity_line_chart;
@@ -187,8 +191,86 @@ public class LineChartActivity extends BaseActivity {
             case R.id.menu_view_touch_zoom_xy:zoomType = ZoomType.HORIZONTAL_AND_VERTICAL;mLineChartView.setZoomType(zoomType);return true;
             case R.id.menu_view_touch_zoom_x:zoomType = ZoomType.HORIZONTAL;mLineChartView.setZoomType(zoomType);return true;
             case R.id.menu_view_touch_zoom_y:zoomType = ZoomType.VERTICAL; mLineChartView.setZoomType(zoomType);return true;
+            case R.id.menu_view_dinamic_graph:dynamicDataDisplay();return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isFinish = false;
+    private int position = 0;
+    private List<PointValue> pointValueList = new ArrayList<>();
+
+    private void dynamicDataDisplay() {
+        resetTimer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(!isFinish){
+                    PointValue value = new PointValue(position * 5, (float) Math.random() * 100);
+                    pointValueList.add(value);
+
+                    float x = value.getX();
+
+                    Line line = new Line(pointValueList);
+                    line.setColor(Color.RED);
+                    line.setShape(ValueShape.CIRCLE);
+                    line.setCubic(true);
+
+                    List<Line> lineList = new ArrayList<>();
+                    lineList.add(line);
+
+                    LineChartData lineChartData = new LineChartData();
+                    lineChartData.setLines(lineList);
+                    Axis axisX = new Axis();
+                    axisX.setName("Axis X");
+                    axisX.setTextColor(Color.GRAY);
+                    lineChartData.setAxisXBottom(axisX);
+
+                    Axis axisY = new Axis().setHasLines(true);
+                    axisY.setName("Axis Y");
+                    axisY.setTextColor(Color.GRAY);
+                    lineChartData.setAxisYLeft(axisY);
+
+                    mLineChartView.setLineChartData(lineChartData);
+
+                    Viewport viewport = new Viewport();
+                    viewport.top = 100;
+                    viewport.bottom = 0;
+                    viewport.left = 0;
+                    viewport.right = 50 ;
+                    if(x > 50){
+                        viewport.left = x-50;
+                        viewport.right = x ;
+                    }
+
+                    mLineChartView.setCurrentViewport(viewport);
+
+                    Viewport viewport1 = new Viewport();
+                    viewport1.top = 100;
+                    viewport1.bottom = 0 ;
+                    viewport1.left = 0;
+                    viewport1.right = x + 50;
+                    mLineChartView.setMaximumViewport(viewport1);
+
+                    position++;
+                    if (position > 100){
+                        isFinish = true;
+//                        mLineChartView.setInteractive(true);
+                    }
+                }
+            }
+        }, 300, 300);
+    }
+
+    private void resetTimer() {
+        if (timer != null){
+            timer.cancel();
+            timer = new Timer();
+        }
+        isFinish = false;
+        pointValueList.clear();
+        position = 0;
+//        mLineChartView.setInteractive(true);
     }
 
     private void showLabelForSelect() {
@@ -293,16 +375,8 @@ public class LineChartActivity extends BaseActivity {
         enableValueSelection = false;
         enableZoom = true;
         zoomType =  ZoomType.HORIZONTAL_AND_VERTICAL;
-        mLineChartView.setInteractive(true);//神奇的设置
-//        position = 0 ;
-//        pointValueList.clear();
-//        lineChartData.clear();
 
-//        if(timer != null){
-//            timer.cancel();
-//            timer = new Timer();
-//        }
-
+        resetTimer();
         setLinesDatas();
         resetViewport();
     }
