@@ -11,4 +11,48 @@
         android:id="@+id/menu_line_add"
         android:title="增加线条"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_hide_show_lines"
+        android:title="显示/隐藏线条"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_hide_show_points"
+        android:title="显示/隐藏节点"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_hide_show_point_labels"
+        android:title="显示/隐藏节点标签"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_chart_hide_show_axis"
+        android:title="显示/隐藏坐标轴"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_chart_hide_show_axis_name"
+        android:title="显示/隐藏坐标轴名称"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_cubic"
+        android:title="曲线/折线"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_fill_area"
+        android:title="填充下方区域"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_different_points_color"
+        android:title="更改节点颜色"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_circle_point"
+        android:title="圆形节点"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_square_point"
+        android:title="方形节点"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_line_diamond_point"
+        android:title="菱形节点"
+        app:showAsAction="never"/>
 </menu>

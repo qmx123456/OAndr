@@ -29,7 +29,7 @@ public class LineChartActivity extends BaseActivity {
     //数据
     private LineChartData mLineData;
     private int numberOfPoints = 12;
-    private int maxNumberOfLines = 1;
+    private int maxNumberOfLines = 4;
     private float[][] randomNumbersTab = new float[maxNumberOfLines][numberOfPoints];
 
     private int numberOfLines = 1;
@@ -46,6 +46,7 @@ public class LineChartActivity extends BaseActivity {
     private boolean doPointsHaveDifferentColor = false;
     private boolean doesHaveAxes = true;
     private boolean doesHaveAxisNames = true;
+    private boolean enableValueSelection = false;
 
     @Override
     public int getLayoutId() {
@@ -124,6 +125,8 @@ public class LineChartActivity extends BaseActivity {
         }
 
         mLineChartView.setLineChartData(mLineData);
+        mLineChartView.setValueSelectionEnabled(enableValueSelection);
+
     }
 
     private void initPointValues() {
@@ -141,7 +144,7 @@ public class LineChartActivity extends BaseActivity {
             public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
                 Toast.makeText(LineChartActivity.this,
                         "选中第"+(lineIndex+1)+"条线，第"+(1+pointIndex)+"个节点\r\n"+"其坐标为("+value.getX()+", "+value.getY()+")",
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -160,23 +163,105 @@ public class LineChartActivity extends BaseActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_line_reset: resetLines(); return true;
+            case R.id.menu_line_add:addLine();return true;
+            case R.id.menu_line_hide_show_lines: showOrHideLines(); return true;
+            case R.id.menu_line_hide_show_points: showOrHidePoints(); return true;
+            case R.id.menu_line_hide_show_point_labels: showOrHidePointLabels(); return true;
+            case R.id.menu_line_chart_hide_show_axis: showOrHideAxis(); return true;
+            case R.id.menu_line_chart_hide_show_axis_name: showOrHideAxisName(); return true;
+            case R.id.menu_line_cubic:changeCubicLine(); return true;
+            case R.id.menu_line_fill_area: fillLineArea(); return true;
+            case R.id.menu_line_different_points_color: differentPointsColor(); return true;
+            case R.id.menu_line_circle_point: circlePoint(); return true;
+            case R.id.menu_line_square_point: squarePoint(); return true;
+            case R.id.menu_line_diamond_point: diamondPoint(); return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void diamondPoint() {
+        pointsShape = ValueShape.DIAMOND;
+        setLinesDatas();
+    }
+
+    private void squarePoint() {
+        pointsShape = ValueShape.SQUARE;
+        setLinesDatas();
+    }
+
+    private void circlePoint() {
+        pointsShape = ValueShape.CIRCLE;
+        setLinesDatas();
+    }
+
+    private void differentPointsColor() {
+        doPointsHaveDifferentColor = !doPointsHaveDifferentColor;
+        setLinesDatas();
+    }
+
+    private void fillLineArea() {
+        isFilled = !isFilled;
+        setLinesDatas();
+    }
+
+    private void changeCubicLine() {
+        isCubic = !isCubic;
+        setLinesDatas();
+    }
+
+    private void showOrHideAxisName() {
+        doesHaveAxisNames = !doesHaveAxisNames;
+        setLinesDatas();
+    }
+
+    private void showOrHideAxis() {
+        doesHaveAxes = !doesHaveAxes;
+        setLinesDatas();
+    }
+
+    private void showOrHidePointLabels() {
+        doesHavePointLabels = !doesHavePointLabels;
+        doesPointHaveLabelForSelected = ! doesHavePointLabels;
+        setLinesDatas();
+    }
+
+    private void showOrHidePoints() {
+        doesHavePoints = !doesHavePoints;
+        setLinesDatas();
+    }
+
+    private void showOrHideLines() {
+        doesHaveLine = !doesHaveLine;
+        setLinesDatas();
+    }
+
+    private void addLine() {
+        if(numberOfLines>= maxNumberOfLines){
+            Toast.makeText(this, "最多只有4条线",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        numberOfLines++;
+        setLinesDatas();
+    }
+
     private void resetLines() {
         numberOfLines = 1;
-        doesHaveAxisNames = true;
+
         doesHaveLine = true;
+        isCubic = false;
+        isFilled = false;
+
         doesHavePoints = true;
         pointsShape = ValueShape.CIRCLE;
-        isFilled = false;
         doesHavePointLabels = false;
-        isCubic = false;
-        doesPointHaveLabelForSelected = false;
+        doesPointHaveLabelForSelected = true;
+
+        doesHaveAxes = true;
+        doesHaveAxisNames = true;
         doPointsHaveDifferentColor = false;
 
-        mLineChartView.setInteractive(true);
+        enableValueSelection = false;
+        mLineChartView.setInteractive(true);//神奇的设置
 //        position = 0 ;
 //        pointValueList.clear();
 //        lineChartData.clear();
@@ -186,9 +271,8 @@ public class LineChartActivity extends BaseActivity {
 //            timer = new Timer();
 //        }
 
-        mLineChartView.setValueSelectionEnabled(doesPointHaveLabelForSelected);
-        resetViewport();
         setLinesDatas();
+        resetViewport();
     }
 
     @Override
