@@ -3,6 +3,7 @@ package com.example.oandr.ui.activity.chart;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -12,6 +13,7 @@ import com.example.oandr.ui.activity.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import lecho.lib.hellocharts.listener.ColumnChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Column;
 import lecho.lib.hellocharts.model.ColumnChartData;
@@ -78,7 +80,17 @@ public class ColumnChartActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        mColumnChartView.setOnValueTouchListener(new ColumnChartOnValueSelectListener() {
+            @Override
+            public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
+                Toast.makeText(ColumnChartActivity.this, "当前列的值约为："+(int)value.getValue(), Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onValueDeselected() {
+
+            }
+        });
     }
 
     @Override
