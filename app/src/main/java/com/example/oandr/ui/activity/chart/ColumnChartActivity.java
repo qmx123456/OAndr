@@ -157,8 +157,20 @@ public class ColumnChartActivity extends BaseActivity {
                 hasAxisLabel = !hasAxisLabel;
                 setColumnDatas();
                 return true;
+            case R.id.menu_column_animation:
+                changeColumnsAnimate();return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void changeColumnsAnimate() {
+        ColumnChartData columnChartData = mColumnChartView.getColumnChartData();
+        for (Column column : columnChartData.getColumns()){
+            for(SubcolumnValue subcolumnValue:column.getValues()){
+                subcolumnValue.setTarget((float)Math.random()*100*getRandomNegative(isNegative));
+            }
+        }
+        mColumnChartView.startDataAnimation();
     }
 
     private void resetColumnDatas() {

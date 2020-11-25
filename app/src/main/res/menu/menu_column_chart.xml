@@ -33,4 +33,8 @@
         android:id="@+id/menu_column_show_axis_name"
         android:title="@string/column_show_axis_name"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_column_animation"
+        android:title="@string/column_animation"
+        app:showAsAction="never"/>
 </menu>
