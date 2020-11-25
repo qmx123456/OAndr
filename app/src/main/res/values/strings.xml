@@ -20,4 +20,7 @@
     <string name="column_touch_zoom_xy">XY方向伸缩</string>
     <string name="column_touch_zoom_x">X方向伸缩</string>
     <string name="column_touch_zoom_y">Y方向伸缩</string>
+    <string name="pie">pie</string>
+    <string name="PieChartBarName">Pie Chart</string>
+    <string name="PieChartSupportChart">饼状图：包括饼状图、环形图</string>
 </resources>

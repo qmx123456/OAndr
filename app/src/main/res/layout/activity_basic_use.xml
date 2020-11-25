@@ -29,6 +29,7 @@
         android:orientation="vertical">
         <include layout="@layout/include_line_chart"/>
         <include layout="@layout/include_column_chart"/>
+        <include layout="@layout/include_pie_chart"/>
     </LinearLayout>
 
 </LinearLayout>
