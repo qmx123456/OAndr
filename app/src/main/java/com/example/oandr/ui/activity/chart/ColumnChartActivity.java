@@ -149,6 +149,10 @@ public class ColumnChartActivity extends BaseActivity {
             case R.id.menu_column_show_label:
                 hasColumnLabels = !hasColumnLabels;
                 setColumnDatas();return true;
+            case R.id.menu_column_show_axis:
+                hasAxis = !hasAxis;
+                setColumnDatas();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

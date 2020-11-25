@@ -12,4 +12,5 @@
     <string name="column_subcolumn_stack">堆放效果</string>
     <string name="column_negative_stack">反向堆放效果</string>
     <string name="column_show_label">显示/隐藏列标签</string>
+    <string name="column_show_axis">显示/隐藏坐标轴名称</string>
 </resources>

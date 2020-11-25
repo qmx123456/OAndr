@@ -25,4 +25,8 @@
         android:id="@+id/menu_column_show_label"
         android:title="@string/column_show_label"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_column_show_axis"
+        android:title="@string/column_show_axis"
+        app:showAsAction="never"/>
 </menu>
