@@ -95,7 +95,8 @@ public class ColumnChartActivity extends BaseActivity {
         mColumnChartView.setOnValueTouchListener(new ColumnChartOnValueSelectListener() {
             @Override
             public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
-                Toast.makeText(ColumnChartActivity.this, "当前列的值约为："+(int)value.getValue(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ColumnChartActivity.this, "第"+String.valueOf(columnIndex+1)+"列，第"
+                        +String.valueOf(subcolumnIndex+1)+"子列，\r\n其值约为："+(int)value.getValue(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -166,6 +167,9 @@ public class ColumnChartActivity extends BaseActivity {
                 }
                 isValueSelectionEnabled = !isValueSelectionEnabled;
                 setColumnDatas();return true;
+            case R.id.menu_column_touch_zoom:
+                mColumnChartView.setZoomEnabled(!mColumnChartView.isZoomEnabled());return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
