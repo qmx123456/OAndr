@@ -27,6 +27,10 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/menu_column_show_axis"
-        android:title="@string/column_show_axis"
+        android:title="@string/column_column_show_axis"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_column_show_axis_name"
+        android:title="@string/column_show_axis_name"
         app:showAsAction="never"/>
 </menu>
