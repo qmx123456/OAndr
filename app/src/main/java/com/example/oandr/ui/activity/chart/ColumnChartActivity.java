@@ -37,6 +37,10 @@ public class ColumnChartActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        setColumnDatas();
+    }
+
+    private void setColumnDatas() {
         ArrayList<Column> columns = new ArrayList<>();
         List<SubcolumnValue> values;
         int numColumns = 8;
