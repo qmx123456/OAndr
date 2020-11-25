@@ -5,4 +5,8 @@
         android:id="@+id/menu_column_reset"
         android:title="@string/column_reset"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_column_subcolumn"
+        android:title="@string/column_subcolumn"
+        app:showAsAction="never"/>
 </menu>

@@ -98,6 +98,8 @@ public class ColumnChartActivity extends BaseActivity {
             case R.id.menu_column_reset:
                 resetColumnDatas();
                 return true;
+            case R.id.menu_column_subcolumn:
+                setColumnDatas(8,4, false);return true;
         }
         return super.onOptionsItemSelected(item);
     }
