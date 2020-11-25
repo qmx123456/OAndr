@@ -8,16 +8,19 @@
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="6dp"
     app:cardElevation="6dp"
+    android:id="@+id/cv_column_chart"
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:transitionName="@string/Column">
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
             <ImageView
+                android:id="@+id/iv_column_chart"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_centerInParent="true"
