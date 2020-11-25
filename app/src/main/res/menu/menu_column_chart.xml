@@ -17,4 +17,8 @@
         android:id="@+id/menu_column_stack"
         android:title="@string/column_subcolumn_stack"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_column_negative_stack"
+        android:title="@string/column_negative_stack"
+        app:showAsAction="never"/>
 </menu>
