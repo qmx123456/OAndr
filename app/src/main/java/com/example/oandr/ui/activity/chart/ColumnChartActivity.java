@@ -1,7 +1,10 @@
 package com.example.oandr.ui.activity.chart;
 
-import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import com.example.oandr.R;
 import com.example.oandr.ui.activity.base.BaseActivity;
@@ -12,7 +15,6 @@ import java.util.List;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Column;
 import lecho.lib.hellocharts.model.ColumnChartData;
-import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.SubcolumnValue;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ColumnChartView;
@@ -24,6 +26,7 @@ public class ColumnChartActivity extends BaseActivity {
     private boolean hasLabelsOnlyForSelected = false;
     private boolean hasAxis = true;
     private boolean hasAxisLabel = true;
+    private boolean isValueSelectionEnabled = false;
 
     @Override
     public int getLayoutId() {
@@ -37,14 +40,12 @@ public class ColumnChartActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        setColumnDatas();
+        setColumnDatas(8, 1, false);
     }
 
-    private void setColumnDatas() {
+    private void setColumnDatas(int numColumns, int numSubColumns, boolean isStacked) {
         ArrayList<Column> columns = new ArrayList<>();
         List<SubcolumnValue> values;
-        int numColumns = 8;
-        int numSubColumns = 1;
         for (int i = 0; i< numColumns; i++){
             values = new ArrayList<>();
             for (int j = 0; j< numSubColumns; j++){
@@ -57,7 +58,7 @@ public class ColumnChartActivity extends BaseActivity {
             columns.add(column);
         }
         ColumnChartData columnChartData = new ColumnChartData(columns);
-        columnChartData.setStacked(true);
+        columnChartData.setStacked(isStacked);
         if(hasAxis){
             Axis axisX = new Axis();
             Axis axisY = new Axis().setHasLines(true);
@@ -72,6 +73,7 @@ public class ColumnChartActivity extends BaseActivity {
             columnChartData.setAxisYLeft(null);
         }
         mColumnChartView.setColumnChartData(columnChartData);
+        mColumnChartView.setValueSelectionEnabled(isValueSelectionEnabled);
     }
 
     @Override
@@ -82,5 +84,30 @@ public class ColumnChartActivity extends BaseActivity {
     @Override
     public void processClick(View v) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_column_chart, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_column_reset:
+                resetColumnDatas();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void resetColumnDatas() {
+        hasColumnLabels = false;
+        hasLabelsOnlyForSelected = false;
+        hasAxis = true;
+        hasAxisLabel = true;
+        isValueSelectionEnabled = false;
+        setColumnDatas(8, 1, false);
     }
 }
