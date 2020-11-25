@@ -23,4 +23,13 @@
     <string name="pie">pie</string>
     <string name="PieChartBarName">Pie Chart</string>
     <string name="PieChartSupportChart">饼状图：包括饼状图、环形图</string>
+    <string name="pie_reset">重置</string>
+    <string name="pie_explode">块分解/紧靠</string>
+    <string name="pie_circle">空心圆环</string>
+    <string name="pie_circle_single_text">环形单行文字</string>
+    <string name="pie_circle_double_text">环形双行文字</string>
+    <string name="pie_inside_label">内部显示/隐藏标签</string>
+    <string name="pie_outside_label">外部显示/隐藏标签</string>
+    <string name="pie_animation">切换动画</string>
+    <string name="pie_show_label">点击显示标签</string>
 </resources>

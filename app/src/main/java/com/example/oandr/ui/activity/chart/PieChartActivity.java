@@ -1,8 +1,12 @@
 package com.example.oandr.ui.activity.chart;
 
 import android.graphics.Typeface;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.oandr.R;
 import com.example.oandr.ui.activity.base.BaseActivity;
@@ -17,12 +21,13 @@ import lecho.lib.hellocharts.view.PieChartView;
 
 public class PieChartActivity extends BaseActivity {
 
-    private final boolean hasLabelsOnlyForSelected = false;
-    private final boolean hasLabelsOutside = false;
-    private final boolean hasCenterCircle = false;
-    private final boolean isExploded = false;
-    private final boolean isHasCenterSingleText = false;
-    private final boolean isHasCenterDoubleText = false;
+    private boolean isValueSelectionEnabled = false;
+    private boolean hasLabelsOnlyForSelected = false;
+    private boolean hasLabelsOutside = false;
+    private boolean hasCenterCircle = false;
+    private boolean isExploded = false;
+    private boolean isHasCenterSingleText = false;
+    private boolean isHasCenterDoubleText = false;
     private PieChartView mPieChartView;
     private boolean hasLabels = false;
 
@@ -70,7 +75,12 @@ public class PieChartActivity extends BaseActivity {
         }
 
         mPieChartView.setPieChartData(pieChartData);
-
+        if(hasLabelsOutside){
+            mPieChartView.setCircleFillRatio(0.7f);
+        }else {
+            mPieChartView.setCircleFillRatio(1.0f);
+        }
+        mPieChartView.setValueSelectionEnabled(isValueSelectionEnabled);
     }
 
     @Override
@@ -81,5 +91,77 @@ public class PieChartActivity extends BaseActivity {
     @Override
     public void processClick(View v) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_pie_chart, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_pie_reset:resetPieChart();return true;
+            case R.id.menu_pie_explode:
+                isExploded = !isExploded;
+                setPieChartData();
+                return true;
+            case R.id.menu_pie_circle:
+                hasCenterCircle = !hasCenterCircle;
+                setPieChartData();return true;
+            case R.id.menu_pie_circle_single_text:
+                hasCenterCircle = true;
+                isHasCenterDoubleText = false;
+                isHasCenterSingleText = !isHasCenterSingleText;
+                setPieChartData();return true;
+            case R.id.menu_pie_circle_double_text:
+                hasCenterCircle = true;
+                isHasCenterSingleText = true;
+                isHasCenterDoubleText = !isHasCenterDoubleText;
+                setPieChartData();return true;
+            case R.id.menu_pie_inside_label:
+                hasLabels = !hasLabels;
+                hasLabelsOutside = false;
+                hasLabelsOnlyForSelected = false;
+                setPieChartData();return true;
+            case R.id.menu_pie_outside_label:
+                hasLabels = !hasLabels;
+                hasLabelsOutside = hasLabels;
+                if (hasLabels){
+                    hasLabelsOnlyForSelected = false;
+                    isValueSelectionEnabled = false;
+                }
+                setPieChartData();return true;
+            case R.id.menu_pie_animation:
+                pieAnimation();return true;
+            case R.id.menu_pie_show_label:
+                hasLabelsOnlyForSelected = !hasLabelsOnlyForSelected;
+                isValueSelectionEnabled = hasLabelsOnlyForSelected;
+                if (hasLabelsOnlyForSelected){
+                    hasLabels = false;
+                }
+                setPieChartData();return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void pieAnimation() {
+        PieChartData pieChartData = mPieChartView.getPieChartData();
+        for (SliceValue value: pieChartData.getValues()){
+            value.setTarget((float)Math.random()*30+15);
+        }
+        mPieChartView.startDataAnimation();
+    }
+
+    private void resetPieChart() {
+        isExploded = false;
+        isHasCenterDoubleText = false;
+        isHasCenterSingleText = false;
+        hasCenterCircle = false;
+        hasLabels = false;
+        hasLabelsOnlyForSelected = false;
+        hasLabelsOutside = false;
+        setPieChartData();
     }
 }

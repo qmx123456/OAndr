@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_pie_reset"
+        android:title="@string/pie_reset"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_pie_explode"
+        android:title="@string/pie_explode"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_pie_circle"
+        android:title="@string/pie_circle"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_pie_circle_single_text"
+        android:title="@string/pie_circle_single_text"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_pie_circle_double_text"
+        android:title="@string/pie_circle_double_text"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_pie_inside_label"
+        android:title="@string/pie_inside_label"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_pie_outside_label"
+        android:title="@string/pie_outside_label"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_pie_animation"
+        android:title="@string/pie_animation"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_pie_show_label"
+        android:title="@string/pie_show_label"
+        app:showAsAction="never"/>
+
+</menu>
