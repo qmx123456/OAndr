@@ -15,4 +15,5 @@
     <string name="column_show_axis_name">显示/隐藏坐标轴名称</string>
     <string name="column_column_show_axis">显示/隐藏坐标轴</string>
     <string name="column_animation">切换动画</string>
+    <string name="column_show_column_label">点击显示标签</string>
 </resources>

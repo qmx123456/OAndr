@@ -159,6 +159,13 @@ public class ColumnChartActivity extends BaseActivity {
                 return true;
             case R.id.menu_column_animation:
                 changeColumnsAnimate();return true;
+            case R.id.menu_column_show_column_label:
+                hasLabelsOnlyForSelected =!hasLabelsOnlyForSelected;
+                if (hasLabelsOnlyForSelected){
+                    hasColumnLabels = false;
+                }
+                isValueSelectionEnabled = !isValueSelectionEnabled;
+                setColumnDatas();return true;
         }
         return super.onOptionsItemSelected(item);
     }
