@@ -28,6 +28,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/include_line_chart"/>
+        <include layout="@layout/include_column_chart"/>
     </LinearLayout>
 
 </LinearLayout>

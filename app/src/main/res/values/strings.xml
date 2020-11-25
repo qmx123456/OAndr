@@ -3,4 +3,6 @@
     <string name="basic">basic</string>
     <string name="LineChartsBarName">Line Charts</string>
     <string name="Line">line</string>
+    <string name="ColumnChartBarName">Column Chart</string>
+    <string name="ColumnChartSupportChart">柱状图：包含柱状图、立体图</string>
 </resources>
