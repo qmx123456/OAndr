@@ -45,4 +45,16 @@
         android:id="@+id/menu_column_touch_zoom"
         android:title="@string/column_touch_zoom"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_column_touch_zoom_xy"
+        android:title="@string/column_touch_zoom_xy"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_column_touch_zoom_x"
+        android:title="@string/column_touch_zoom_x"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_column_touch_zoom_y"
+        android:title="@string/column_touch_zoom_y"
+        app:showAsAction="never"/>
 </menu>

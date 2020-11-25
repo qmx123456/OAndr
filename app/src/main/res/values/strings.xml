@@ -17,4 +17,7 @@
     <string name="column_animation">切换动画</string>
     <string name="column_show_column_label">点击显示标签</string>
     <string name="column_touch_zoom">伸缩图表</string>
+    <string name="column_touch_zoom_xy">XY方向伸缩</string>
+    <string name="column_touch_zoom_x">X方向伸缩</string>
+    <string name="column_touch_zoom_y">Y方向伸缩</string>
 </resources>

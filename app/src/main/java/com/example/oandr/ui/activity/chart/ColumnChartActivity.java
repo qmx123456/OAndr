@@ -13,6 +13,7 @@ import com.example.oandr.ui.activity.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.listener.ColumnChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Column;
@@ -169,6 +170,15 @@ public class ColumnChartActivity extends BaseActivity {
                 setColumnDatas();return true;
             case R.id.menu_column_touch_zoom:
                 mColumnChartView.setZoomEnabled(!mColumnChartView.isZoomEnabled());return true;
+            case R.id.menu_column_touch_zoom_xy:
+                mColumnChartView.setZoomEnabled(true);
+                mColumnChartView.setZoomType(ZoomType.HORIZONTAL_AND_VERTICAL);return true;
+            case R.id.menu_column_touch_zoom_x:
+                mColumnChartView.setZoomEnabled(true);
+                mColumnChartView.setZoomType(ZoomType.HORIZONTAL);return true;
+            case R.id.menu_column_touch_zoom_y:
+                mColumnChartView.setZoomEnabled(true);
+                mColumnChartView.setZoomType(ZoomType.VERTICAL);return true;
 
         }
         return super.onOptionsItemSelected(item);
@@ -195,5 +205,7 @@ public class ColumnChartActivity extends BaseActivity {
         this.numColumns = 8;
         this.numSubColumns =1;
         setColumnDatas();
+        mColumnChartView.setZoomEnabled(true);
+        mColumnChartView.setZoomType(ZoomType.HORIZONTAL_AND_VERTICAL);
     }
 }
