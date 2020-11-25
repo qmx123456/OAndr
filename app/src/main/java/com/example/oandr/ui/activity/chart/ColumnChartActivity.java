@@ -122,6 +122,8 @@ public class ColumnChartActivity extends BaseActivity {
                 setColumnDatas(8,4, false, false);return true;
             case R.id.menu_column_negative_subcolumn:
                 setColumnDatas(8,4,false, true);return true;
+            case R.id.menu_column_stack:
+                setColumnDatas(8,4,true,false);return true;
         }
         return super.onOptionsItemSelected(item);
     }

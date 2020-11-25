@@ -9,4 +9,5 @@
     <string name="column_reset">重置</string>
     <string name="column_subcolumn">子列</string>
     <string name="column_negative_column">反向子列</string>
+    <string name="column_subcolumn_stack">堆放效果</string>
 </resources>
