@@ -9,4 +9,8 @@
         android:id="@+id/menu_column_subcolumn"
         android:title="@string/column_subcolumn"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_column_negative_subcolumn"
+        android:title="@string/column_negative_column"
+        app:showAsAction="never"/>
 </menu>

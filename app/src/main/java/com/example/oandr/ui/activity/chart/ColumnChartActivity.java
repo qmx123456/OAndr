@@ -42,16 +42,16 @@ public class ColumnChartActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        setColumnDatas(8, 1, false);
+        setColumnDatas(8, 1, false, false);
     }
 
-    private void setColumnDatas(int numColumns, int numSubColumns, boolean isStacked) {
+    private void setColumnDatas(int numColumns, int numSubColumns, boolean isStacked, boolean isNegative) {
         ArrayList<Column> columns = new ArrayList<>();
         List<SubcolumnValue> values;
         for (int i = 0; i< numColumns; i++){
             values = new ArrayList<>();
             for (int j = 0; j< numSubColumns; j++){
-                values.add(new SubcolumnValue((float)Math.random()*50, ChartUtils.pickColor()));
+                values.add(new SubcolumnValue((float)Math.random()*50* getRandomNegative(isNegative), ChartUtils.pickColor()));
             }
             Column column = new Column(values);
 
@@ -76,6 +76,14 @@ public class ColumnChartActivity extends BaseActivity {
         }
         mColumnChartView.setColumnChartData(columnChartData);
         mColumnChartView.setValueSelectionEnabled(isValueSelectionEnabled);
+    }
+
+    private int getRandomNegative(boolean isNegative) {
+        if(isNegative){
+            int[] sign = {1, -1};
+            return sign[(int)Math.round(Math.random())];
+        }
+        return 1;
     }
 
     @Override
@@ -111,7 +119,9 @@ public class ColumnChartActivity extends BaseActivity {
                 resetColumnDatas();
                 return true;
             case R.id.menu_column_subcolumn:
-                setColumnDatas(8,4, false);return true;
+                setColumnDatas(8,4, false, false);return true;
+            case R.id.menu_column_negative_subcolumn:
+                setColumnDatas(8,4,false, true);return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -122,6 +132,6 @@ public class ColumnChartActivity extends BaseActivity {
         hasAxis = true;
         hasAxisLabel = true;
         isValueSelectionEnabled = false;
-        setColumnDatas(8, 1, false);
+        setColumnDatas(8, 1, false, false);
     }
 }
