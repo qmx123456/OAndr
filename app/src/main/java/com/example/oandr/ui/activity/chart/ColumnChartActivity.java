@@ -29,6 +29,10 @@ public class ColumnChartActivity extends BaseActivity {
     private boolean hasAxis = true;
     private boolean hasAxisLabel = true;
     private boolean isValueSelectionEnabled = false;
+    private boolean isStacked = false;
+    private boolean isNegative = false;
+    private int numColumns = 8;
+    private int numSubColumns  = 1;
 
     @Override
     public int getLayoutId() {
@@ -42,16 +46,16 @@ public class ColumnChartActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        setColumnDatas(8, 1, false, false);
+        setColumnDatas();
     }
 
-    private void setColumnDatas(int numColumns, int numSubColumns, boolean isStacked, boolean isNegative) {
+    private void setColumnDatas() {
         ArrayList<Column> columns = new ArrayList<>();
         List<SubcolumnValue> values;
-        for (int i = 0; i< numColumns; i++){
+        for (int i = 0; i< this.numColumns; i++){
             values = new ArrayList<>();
-            for (int j = 0; j< numSubColumns; j++){
-                values.add(new SubcolumnValue((float)Math.random()*50* getRandomNegative(isNegative), ChartUtils.pickColor()));
+            for (int j = 0; j< this.numSubColumns; j++){
+                values.add(new SubcolumnValue((float)Math.random()*50* getRandomNegative(this.isNegative), ChartUtils.pickColor()));
             }
             Column column = new Column(values);
 
@@ -60,7 +64,7 @@ public class ColumnChartActivity extends BaseActivity {
             columns.add(column);
         }
         ColumnChartData columnChartData = new ColumnChartData(columns);
-        columnChartData.setStacked(isStacked);
+        columnChartData.setStacked(this.isStacked);
         if(hasAxis){
             Axis axisX = new Axis();
             Axis axisY = new Axis().setHasLines(true);
@@ -119,13 +123,32 @@ public class ColumnChartActivity extends BaseActivity {
                 resetColumnDatas();
                 return true;
             case R.id.menu_column_subcolumn:
-                setColumnDatas(8,4, false, false);return true;
+                this.isStacked = false;
+                this.isNegative = false;
+                this.numColumns = 8;
+                this.numSubColumns =4;
+                setColumnDatas();return true;
             case R.id.menu_column_negative_subcolumn:
-                setColumnDatas(8,4,false, true);return true;
+                this.isStacked = false;
+                this.isNegative = true;
+                this.numColumns = 8;
+                this.numSubColumns =4;
+                setColumnDatas();return true;
             case R.id.menu_column_stack:
-                setColumnDatas(8,4,true,false);return true;
+                this.isStacked = true;
+                this.isNegative = false;
+                this.numColumns = 8;
+                this.numSubColumns =4;
+                setColumnDatas();return true;
             case R.id.menu_column_negative_stack:
-                setColumnDatas(8,4,true,true);return true;
+                this.isStacked = true;
+                this.isNegative = true;
+                this.numColumns = 8;
+                this.numSubColumns =4;
+                setColumnDatas();return true;
+            case R.id.menu_column_show_label:
+                hasColumnLabels = !hasColumnLabels;
+                setColumnDatas();return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -136,6 +159,10 @@ public class ColumnChartActivity extends BaseActivity {
         hasAxis = true;
         hasAxisLabel = true;
         isValueSelectionEnabled = false;
-        setColumnDatas(8, 1, false, false);
+        isNegative = false;
+        isStacked = false;
+        this.numColumns = 8;
+        this.numSubColumns =1;
+        setColumnDatas();
     }
 }
