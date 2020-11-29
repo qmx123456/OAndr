@@ -32,4 +32,6 @@
     <string name="pie_outside_label">外部显示/隐藏标签</string>
     <string name="pie_animation">切换动画</string>
     <string name="pie_show_label">点击显示标签</string>
+    <string name="BubbleChartBarName">Bubble Chart</string>
+    <string name="BubbleChartSupportChart">气泡图：类似散点图</string>
 </resources>

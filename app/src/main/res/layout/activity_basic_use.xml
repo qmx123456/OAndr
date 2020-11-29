@@ -30,6 +30,7 @@
         <include layout="@layout/include_line_chart"/>
         <include layout="@layout/include_column_chart"/>
         <include layout="@layout/include_pie_chart"/>
+        <include layout="@layout/include_bubble_chart"/>
     </LinearLayout>
 
 </LinearLayout>
