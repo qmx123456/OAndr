@@ -34,4 +34,5 @@
     <string name="pie_show_label">点击显示标签</string>
     <string name="BubbleChartBarName">Bubble Chart</string>
     <string name="BubbleChartSupportChart">气泡图：类似散点图</string>
+    <string name="bubble">bubble</string>
 </resources>

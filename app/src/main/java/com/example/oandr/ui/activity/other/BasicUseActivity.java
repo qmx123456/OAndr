@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 
 import com.example.oandr.R;
 import com.example.oandr.ui.activity.base.BaseActivity;
+import com.example.oandr.ui.activity.chart.BubbleChartActivity;
 import com.example.oandr.ui.activity.chart.ColumnChartActivity;
 import com.example.oandr.ui.activity.chart.LineChartActivity;
 import com.example.oandr.ui.activity.chart.PieChartActivity;
@@ -24,6 +25,8 @@ public class BasicUseActivity extends BaseActivity {
     private CardView columnChart;
     private CardView pieChart;
     private ImageView pieImage;
+    private CardView bubbleCardView;
+    private ImageView bubbleImage;
 
     @Override
     public int getLayoutId() {
@@ -42,6 +45,9 @@ public class BasicUseActivity extends BaseActivity {
 
         pieChart = (CardView) findViewById(R.id.cv_pie_chart);
         pieImage = (ImageView) findViewById(R.id.iv_pie_chart);
+
+        bubbleCardView = (CardView) findViewById(R.id.cv_bubble_chart);
+        bubbleImage = (ImageView) findViewById(R.id.iv_bubble_chart);
     }
     @Override
     public void initData() {
@@ -53,6 +59,7 @@ public class BasicUseActivity extends BaseActivity {
         lineCardView.setOnClickListener(this);
         columnChart.setOnClickListener(this);
         pieChart.setOnClickListener(this);
+        bubbleCardView.setOnClickListener(this);
     }
 
     @Override
@@ -72,6 +79,10 @@ public class BasicUseActivity extends BaseActivity {
                 Intent i3 = new Intent(this, PieChartActivity.class);
                 ActivityOptions activityOptions2 = ActivityOptions.makeSceneTransitionAnimation(this, pieImage, getString(R.string.pie));
                 startActivity(i3, activityOptions2.toBundle());
+            case R.id.cv_bubble_chart:
+                Intent i4 = new Intent(this, BubbleChartActivity.class);
+                ActivityOptions activityOptions3 = ActivityOptions.makeSceneTransitionAnimation(this, bubbleImage, getString(R.string.bubble));
+                startActivity(i4, activityOptions3.toBundle());
         }
     }
 }
