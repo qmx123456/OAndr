@@ -93,18 +93,18 @@ public class ColumnChartActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-//        mColumnChartView.setOnValueTouchListener(new ColumnChartOnValueSelectListener() {
-//            @Override
-//            public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
-//                Toast.makeText(ColumnChartActivity.this, "第"+String.valueOf(columnIndex+1)+"列，第"
-//                        +String.valueOf(subcolumnIndex+1)+"子列，\r\n其值约为："+(int)value.getValue(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onValueDeselected() {
-//
-//            }
-//        });
+        mColumnChartView.setOnValueTouchListener(new ColumnChartOnValueSelectListener() {
+            @Override
+            public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
+                Toast.makeText(ColumnChartActivity.this, "第"+String.valueOf(columnIndex+1)+"列，第"
+                        +String.valueOf(subcolumnIndex+1)+"子列，\r\n其值约为："+(int)value.getValue(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onValueDeselected() {
+
+            }
+        });
     }
 
     @Override

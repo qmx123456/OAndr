@@ -14,6 +14,7 @@ import com.example.oandr.ui.activity.base.BaseActivity;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.util.ChartUtils;
@@ -85,7 +86,17 @@ public class PieChartActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        mPieChartView.setOnValueTouchListener(new PieChartOnValueSelectListener() {
+            @Override
+            public void onValueSelected(int arcIndex, SliceValue value) {
+                Toast.makeText(PieChartActivity.this, "第"+(arcIndex+1)+"块，其值为："+value.getValue()+"%", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onValueDeselected() {
+
+            }
+        });
     }
 
     @Override
