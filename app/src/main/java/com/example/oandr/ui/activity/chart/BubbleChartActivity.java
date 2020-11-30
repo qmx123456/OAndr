@@ -23,6 +23,8 @@ import lecho.lib.hellocharts.view.BubbleChartView;
 
 public class BubbleChartActivity extends BaseActivity {
 
+    private boolean isZoomEnabled = true;
+    private ZoomType zoomType = ZoomType.HORIZONTAL_AND_VERTICAL;
     private boolean isValueSelectionEnabled = false;
     private boolean hasAxis = true;
     private boolean hasAxisName = true;
@@ -76,6 +78,8 @@ public class BubbleChartActivity extends BaseActivity {
 
         mBubbleView.setBubbleChartData(mbubbleChartData);
         mBubbleView.setValueSelectionEnabled(isValueSelectionEnabled);
+        mBubbleView.setZoomEnabled(isZoomEnabled);
+        mBubbleView.setZoomType(zoomType);
     }
 
     @Override
@@ -107,41 +111,56 @@ public class BubbleChartActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.menu_bubble_reset:reset();return true;
+            case R.id.menu_bubble_reset:reset();
+                return true;
             case R.id.menu_bubble_style_circle:
-                bubbleShape = ValueShape.CIRCLE;setBubbleData();return true;
+                bubbleShape = ValueShape.CIRCLE;setBubbleData();
+                return true;
             case R.id.menu_bubble_style_tangle:
-                bubbleShape=ValueShape.SQUARE;setBubbleData();return true;
+                bubbleShape=ValueShape.SQUARE;setBubbleData();
+                return true;
             case R.id.menu_bubble_show_label:
                 hasLabels = !hasLabels;
                 if(hasLabels){
                     hasLabelsOnlyForSelected = false;
                     isValueSelectionEnabled = false;
                 }
-                setBubbleData();return true;
+                setBubbleData();
+                return true;
             case R.id.menu_bubble_show_axis:
                 hasAxis = !hasAxis;
-                setBubbleData();return true;
+                setBubbleData();
+                return true;
             case R.id.menu_bubble_show_axis_name:
                 hasAxisName = !hasAxisName;
-                setBubbleData();return true;
+                setBubbleData();
+                return true;
             case R.id.menu_bubble_dynamic:
-                dynamic();return true;
+                dynamic();
+                return true;
             case R.id.menu_bubble_click_show_label:
                 hasLabelsOnlyForSelected = !hasLabelsOnlyForSelected;
                 isValueSelectionEnabled = hasLabelsOnlyForSelected;
                 if (hasLabelsOnlyForSelected){
                     hasLabels = false;
                 }
-                setBubbleData();return true;
+                setBubbleData();
+                return true;
             case R.id.menu_bubble_zoom:
                 mBubbleView.setZoomEnabled(!mBubbleView.isZoomEnabled());
+                return true;
             case R.id.menu_bubble_zoom_XY:
+                mBubbleView.setZoomEnabled(true);
                 mBubbleView.setZoomType(ZoomType.HORIZONTAL_AND_VERTICAL);
+                return true;
             case R.id.menu_bubble_zoom_X:
+                mBubbleView.setZoomEnabled(true);
                 mBubbleView.setZoomType(ZoomType.HORIZONTAL);
+                return true;
             case R.id.menu_bubble_zoom_Y:
+                mBubbleView.setZoomEnabled(true);
                 mBubbleView.setZoomType(ZoomType.VERTICAL);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -160,6 +179,8 @@ public class BubbleChartActivity extends BaseActivity {
         hasLabelsOnlyForSelected = false;
         hasLabels = false;
         bubbleShape = ValueShape.CIRCLE;
+        isZoomEnabled = true;
+        zoomType = ZoomType.HORIZONTAL_AND_VERTICAL;
         setBubbleData();
     }
 }

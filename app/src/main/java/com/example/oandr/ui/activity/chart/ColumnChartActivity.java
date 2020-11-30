@@ -23,6 +23,8 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 
 public class ColumnChartActivity extends BaseActivity {
 
+    private ZoomType zoomType = ZoomType.HORIZONTAL_AND_VERTICAL;
+    private boolean isZoomEnabled = true;
     private ColumnChartView mColumnChartView;
     private boolean hasColumnLabels = false;
     private boolean hasLabelsOnlyForSelected = false;
@@ -80,6 +82,8 @@ public class ColumnChartActivity extends BaseActivity {
         }
         mColumnChartView.setColumnChartData(columnChartData);
         mColumnChartView.setValueSelectionEnabled(isValueSelectionEnabled);
+        mColumnChartView.setZoomEnabled(isZoomEnabled);
+        mColumnChartView.setZoomType(zoomType);
     }
 
     private int getRandomNegative(boolean isNegative) {
@@ -159,25 +163,31 @@ public class ColumnChartActivity extends BaseActivity {
                 setColumnDatas();
                 return true;
             case R.id.menu_column_animation:
-                changeColumnsAnimate();return true;
+                changeColumnsAnimate();
+                return true;
             case R.id.menu_column_show_column_label:
                 hasLabelsOnlyForSelected =!hasLabelsOnlyForSelected;
                 if (hasLabelsOnlyForSelected){
                     hasColumnLabels = false;
                 }
                 isValueSelectionEnabled = !isValueSelectionEnabled;
-                setColumnDatas();return true;
+                setColumnDatas();
+                return true;
             case R.id.menu_column_touch_zoom:
-                mColumnChartView.setZoomEnabled(!mColumnChartView.isZoomEnabled());return true;
+                mColumnChartView.setZoomEnabled(!mColumnChartView.isZoomEnabled());
+                return true;
             case R.id.menu_column_touch_zoom_xy:
                 mColumnChartView.setZoomEnabled(true);
-                mColumnChartView.setZoomType(ZoomType.HORIZONTAL_AND_VERTICAL);return true;
+                mColumnChartView.setZoomType(ZoomType.HORIZONTAL_AND_VERTICAL);
+                return true;
             case R.id.menu_column_touch_zoom_x:
                 mColumnChartView.setZoomEnabled(true);
-                mColumnChartView.setZoomType(ZoomType.HORIZONTAL);return true;
+                mColumnChartView.setZoomType(ZoomType.HORIZONTAL);
+                return true;
             case R.id.menu_column_touch_zoom_y:
                 mColumnChartView.setZoomEnabled(true);
-                mColumnChartView.setZoomType(ZoomType.VERTICAL);return true;
+                mColumnChartView.setZoomType(ZoomType.VERTICAL);
+                return true;
 
         }
         return super.onOptionsItemSelected(item);
@@ -203,8 +213,8 @@ public class ColumnChartActivity extends BaseActivity {
         isStacked = false;
         this.numColumns = 8;
         this.numSubColumns =1;
+        zoomType = ZoomType.HORIZONTAL_AND_VERTICAL;
+        isZoomEnabled = true;
         setColumnDatas();
-        mColumnChartView.setZoomEnabled(true);
-        mColumnChartView.setZoomType(ZoomType.HORIZONTAL_AND_VERTICAL);
     }
 }
