@@ -13,8 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:transitionName="@string/Column">
+        android:orientation="horizontal">
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -26,7 +25,7 @@
                 android:layout_centerInParent="true"
                 android:src="@mipmap/icon_column"
                 android:scaleType="centerCrop"
-                />
+                android:transitionName="@string/Column"/>
         </RelativeLayout>
         <LinearLayout
                 android:layout_width="0dp"

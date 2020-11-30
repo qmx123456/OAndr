@@ -35,4 +35,16 @@
     <string name="BubbleChartBarName">Bubble Chart</string>
     <string name="BubbleChartSupportChart">气泡图：类似散点图</string>
     <string name="bubble">bubble</string>
+    <string name="bubble_reset">重置</string>
+    <string name="bubble_style_circle">圆形气泡</string>
+    <string name="bubble_style_tangle">方形气泡</string>
+    <string name="bubble_show_label">显示/隐藏气泡标签</string>
+    <string name="bubble_show_axis">显示/隐藏坐标轴</string>
+    <string name="bubble_show_axis_name">显示/隐藏坐标轴名称</string>
+    <string name="bubble_dynamic">切换动画</string>
+    <string name="bubble_click_show_label">点击气泡显示标签</string>
+    <string name="bubble_zoom">伸缩图表</string>
+    <string name="bubble_zoom_XY">XY方向伸缩</string>
+    <string name="bubble_zoom_X">X方向伸缩</string>
+    <string name="bubble_zoom_Y">Y方向伸缩</string>
 </resources>

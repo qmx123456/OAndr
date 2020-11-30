@@ -22,8 +22,8 @@ public class BasicUseActivity extends BaseActivity {
     private CardView lineCardView;
     private ImageView lineImage;
     private ImageView columnImage;
-    private CardView columnChart;
-    private CardView pieChart;
+    private CardView columnCardView;
+    private CardView pieCardView;
     private ImageView pieImage;
     private CardView bubbleCardView;
     private ImageView bubbleImage;
@@ -40,10 +40,10 @@ public class BasicUseActivity extends BaseActivity {
         lineCardView = (CardView) findViewById(R.id.cv_line_chart);
         lineImage = (ImageView) findViewById(R.id.iv_line_chart);
 
-        columnChart = (CardView) findViewById(R.id.cv_column_chart);
+        columnCardView = (CardView) findViewById(R.id.cv_column_chart);
         columnImage = (ImageView) findViewById(R.id.iv_column_chart);
 
-        pieChart = (CardView) findViewById(R.id.cv_pie_chart);
+        pieCardView = (CardView) findViewById(R.id.cv_pie_chart);
         pieImage = (ImageView) findViewById(R.id.iv_pie_chart);
 
         bubbleCardView = (CardView) findViewById(R.id.cv_bubble_chart);
@@ -57,8 +57,8 @@ public class BasicUseActivity extends BaseActivity {
     @Override
     public void initListener() {
         lineCardView.setOnClickListener(this);
-        columnChart.setOnClickListener(this);
-        pieChart.setOnClickListener(this);
+        columnCardView.setOnClickListener(this);
+        pieCardView.setOnClickListener(this);
         bubbleCardView.setOnClickListener(this);
     }
 
