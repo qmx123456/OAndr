@@ -3,6 +3,7 @@ package com.example.oandr.ui.activity.chart;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lecho.lib.hellocharts.gesture.ZoomType;
+import lecho.lib.hellocharts.listener.BubbleChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.BubbleChartData;
 import lecho.lib.hellocharts.model.BubbleValue;
@@ -79,7 +81,18 @@ public class BubbleChartActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        mBubbleView.setOnValueTouchListener(new BubbleChartOnValueSelectListener() {
+            @Override
+            public void onValueSelected(int bubbleIndex, BubbleValue value) {
+                Toast.makeText(BubbleChartActivity.this,
+                        "第"+(bubbleIndex+1)+"个泡泡，其值约为：("+value.getX()+", "+value.getY()+", "+value.getZ()+")", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onValueDeselected() {
+
+            }
+        });
     }
 
     @Override
