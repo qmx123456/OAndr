@@ -35,15 +35,17 @@
             android:textSize="28sp"/>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
-        android:id="@+id/iv_main_usage"
+        android:id="@+id/cv_main_usage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="6dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        android:transitionName="@string/usage">
         <ImageView
+            android:id="@+id/iv_main_useage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@mipmap/heng_4"

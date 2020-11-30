@@ -47,4 +47,5 @@
     <string name="bubble_zoom_XY">XY方向伸缩</string>
     <string name="bubble_zoom_X">X方向伸缩</string>
     <string name="bubble_zoom_Y">Y方向伸缩</string>
+    <string name="usage">usage</string>
 </resources>
