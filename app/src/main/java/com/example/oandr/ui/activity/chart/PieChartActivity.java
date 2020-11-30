@@ -89,7 +89,8 @@ public class PieChartActivity extends BaseActivity {
         mPieChartView.setOnValueTouchListener(new PieChartOnValueSelectListener() {
             @Override
             public void onValueSelected(int arcIndex, SliceValue value) {
-                Toast.makeText(PieChartActivity.this, "第"+(arcIndex+1)+"块，其值为："+value.getValue()+"%", Toast.LENGTH_SHORT).show();
+                String text = "第" + (arcIndex + 1) + "块，其值为：" + value.getValue() + "%";
+                baseText(text);
             }
 
             @Override

@@ -152,9 +152,7 @@ public class LineChartActivity extends BaseActivity {
         mLineChartView.setOnValueTouchListener(new LineChartOnValueSelectListener() {
             @Override
             public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
-                Toast.makeText(LineChartActivity.this,
-                        "选中第"+(lineIndex+1)+"条线，第"+(1+pointIndex)+"个节点\r\n"+"其坐标为("+value.getX()+", "+value.getY()+")",
-                        Toast.LENGTH_SHORT).show();
+                baseText("选中第" + (lineIndex + 1) + "条线，第" + (1 + pointIndex) + "个节点\r\n" + "其坐标为(" + value.getX() + ", " + value.getY() + ")");
             }
 
             @Override

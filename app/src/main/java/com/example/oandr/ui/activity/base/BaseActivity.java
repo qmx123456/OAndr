@@ -24,7 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         processClick(v);
     }
 
-    protected void basetToast(String msg){
+    protected void baseText(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
     protected void baseToast(int msgId){
