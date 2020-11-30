@@ -68,21 +68,24 @@ public class BasicUseActivity extends BaseActivity {
         switch (v.getId()){
             case R.id.cv_line_chart:
                 Intent i1 = new Intent(this, LineChartActivity.class);
-                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, lineImage, getString(R.string.Line));
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, lineImage, getString(R.string.line));
                 startActivity(i1, activityOptions.toBundle());
                 break;
             case  R.id.cv_column_chart:
                 Intent i2 = new Intent(this, ColumnChartActivity.class);
-                ActivityOptions activityOptions1 = ActivityOptions.makeSceneTransitionAnimation(this, columnImage, getString(R.string.Column));
+                ActivityOptions activityOptions1 = ActivityOptions.makeSceneTransitionAnimation(this, columnImage, getString(R.string.column));
                 startActivity(i2, activityOptions1.toBundle());
+                break;
             case R.id.cv_pie_chart:
                 Intent i3 = new Intent(this, PieChartActivity.class);
                 ActivityOptions activityOptions2 = ActivityOptions.makeSceneTransitionAnimation(this, pieImage, getString(R.string.pie));
                 startActivity(i3, activityOptions2.toBundle());
+                break;
             case R.id.cv_bubble_chart:
                 Intent i4 = new Intent(this, BubbleChartActivity.class);
                 ActivityOptions activityOptions3 = ActivityOptions.makeSceneTransitionAnimation(this, bubbleImage, getString(R.string.bubble));
                 startActivity(i4, activityOptions3.toBundle());
+                break;
         }
     }
 }

@@ -2,10 +2,10 @@
     <string name="app_name">HelloCharts</string>
     <string name="basic">basic</string>
     <string name="LineChartsBarName">Line Charts</string>
-    <string name="Line">line</string>
+    <string name="line">line</string>
     <string name="ColumnChartBarName">Column Chart</string>
     <string name="ColumnChartSupportChart">柱状图：包含柱状图、立体图</string>
-    <string name="Column">column</string>
+    <string name="column">column</string>
     <string name="column_reset">重置</string>
     <string name="column_subcolumn">子列</string>
     <string name="column_negative_column">反向子列</string>
